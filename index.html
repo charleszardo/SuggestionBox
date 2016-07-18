@@ -5,23 +5,12 @@
 	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/
 	css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
-	<script type="text/javascript" src="js/vendor/angular.min.js"></script>
+	<script src="js/vendor/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.2.28/angular-route.min.js"></script>
 </head>
 <body ng-app="SuggestionBox" ng-controller="HomeController">
-	<form ng-submit="addSuggestion()" style="margin-top: 50px">
-		<h3>Submit Your Suggestion</h3>
-		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Make a suggestion here" ng-model="title"></input>
-		</div>
-		<button type="submit" class="btn btn-primary">Suggest</button>
-	</form>
+	<div ng-view></div>
 	
-	<div class="posts" ng-repeat="post in posts | orderBy: 'upvotes'">
-		<h3>{{ post.title }}</h3>
-		<p>
-			<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(post)"></span> Upvotes: {{ post.upvotes}}
-		</p>
-	</div>
 	<!-- Modules -->
 	<script src="js/app.js"></script>
 	
