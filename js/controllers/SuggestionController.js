@@ -3,9 +3,13 @@ app.controller('SuggestionController', ['$scope', '$routeParams', 'suggestions',
 		$scope.post = suggestions.posts[$routeParams.id];
 		
 		$scope.addComment = function(post) {
-				post.comments.push({
-					body: $scope.postBody,
-					upvotes: 0
+			if (!$scope.postBody || $scope.postBody === '') {
+				return;
+			}
+			
+			post.comments.push({
+				body: $scope.postBody,
+				upvotes: 0
 			});
 		};
 		
