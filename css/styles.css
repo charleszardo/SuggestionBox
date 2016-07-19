@@ -12,7 +12,11 @@
 	padding: 15px;
 }
 
-.post {
+.post, .submit {
 	border-bottom: 1px solid;
 	padding: 10px 0;
+}
+
+.home-link {
+	margin-top: 20px;
 }

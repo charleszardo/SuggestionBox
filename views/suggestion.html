@@ -1,11 +1,14 @@
 <div class="row submit">
+	<h3>{{ post.title }}</h3>
 	<form ng-submit="addComment(post)" style="margin-top: 50px">
-		<h3>{{ post.title }}</h3>
 		<div class="form-group">
 			<input type="text" class="form-control" placeholder="Add a comment here" ng-model="postBody"></input>
 		</div>
 		<button type="submit" class="btn btn-primary">Comment</button>
 	</form>
+</div>
+<div class="row">
+	<h5>Comments ( {{ post.comments.length }} ):</h5>
 </div>
 <div class="comments" ng-repeat="comment in post.comments | orderBy: '-upvotes'">
 	<div class="row post">
@@ -15,5 +18,6 @@
 		</p>
 	</div>
 </div>
-
-<a href="#/">Home</a>
+<div class="row home-link">
+	<a href="#/">Home</a>
+</div>
