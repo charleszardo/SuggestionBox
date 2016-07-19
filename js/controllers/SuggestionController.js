@@ -11,9 +11,11 @@ app.controller('SuggestionController', ['$scope', '$routeParams', 'suggestions',
 				body: $scope.postBody,
 				upvotes: 0
 			});
+			
+			$scope.postBody = '';
 		};
 		
 		$scope.upVote = function(comment) {
-			comment.upVotes += 1;
+			comment.upvotes += 1;
 		};
 }]);
