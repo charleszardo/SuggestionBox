@@ -1,19 +1,15 @@
-{{ post }}
-
-<div ng-repeat="comment in post.comments"></div>
-
 <form ng-submit="addComment(post)" style="margin-top: 50px">
-	<h3>Add a comment</h3>
+	<h3>{{ post.title }}</h3>
 	<div class="form-group">
-		<input type="text" class="form-control" placeholder="Make a suggestion here" ng-model="postBody"></input>
+		<input type="text" class="form-control" placeholder="Add a comment here" ng-model="postBody"></input>
 	</div>
-	<button type="submit" class="btn btn-primary">Suggest</button>
+	<button type="submit" class="btn btn-primary">Comment</button>
 </form>
 
-<div class="posts" ng-repeat="comment in post.comments | orderBy: 'upvotes'">
-	<h3>{{ comment.body }}</h3>
+<div class="comments" ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+	<p>{{ comment.body }}</p>
 	<p>
-		<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(post.comment)"></span> Upvotes: {{ comment.upvotes}}
+		<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span> Upvotes: {{ comment.upvotes }}
 	</p>
 </div>
 
