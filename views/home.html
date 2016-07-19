@@ -4,7 +4,7 @@
 		<p>
 			<span class="glyphicon glyphicon-plus-sign" 	ng-click="upVote(post)"></span>
 			<span>
-				Upvotes: {{ post.upvotes }} | <a ng-href="#/suggestion/{{getPostIndex(post)}}">Comments</a>
+				Upvotes: {{ post.upvotes }} | <a ng-href="#/suggestion/{{getPostIndex(post)}}">Comments ( {{ post.comments.length }} )</a>
 			</span>
 		</p>
 	</div>
