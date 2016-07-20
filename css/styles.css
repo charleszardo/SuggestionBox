@@ -1,22 +1,18 @@
 .main-container {
-	width: 60%;
-	margin: 0 auto;
+    width: 60%;
+    margin: 0 auto;
 }
-
-.view-container {
-	width: 100%;
+.main-container .title {
+    border-bottom: 2px solid;
+    padding: 15px;
 }
-
-.title {
-	border-bottom: 2px solid;
-	padding: 15px;
+.main-container .view-container {
+    width: 100%;
 }
-
-.post, .submit {
-	border-bottom: 1px solid;
-	padding: 10px 0;
+.main-container .view-container .post, .main-container .view-container .submit {
+    border-bottom: 1px solid;
+    padding: 10px 0;
 }
-
-.home-link {
-	margin-top: 20px;
+.main-container .view-container .home-link {
+    margin-top: 20px;
 }

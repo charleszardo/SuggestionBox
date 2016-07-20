@@ -1,0 +1,18 @@
+.main-container {
+	width: 60%;
+	margin: 0 auto;
+	.title {
+		border-bottom: 2px solid;
+		padding: 15px;
+	}
+	.view-container {
+		width: 100%;
+		.post, .submit {
+			border-bottom: 1px solid;
+			padding: 10px 0;
+		}
+		.home-link {
+			margin-top: 20px;
+		}
+	}
+}
