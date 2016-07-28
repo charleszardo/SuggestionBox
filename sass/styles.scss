@@ -13,13 +13,42 @@ strong {
 	color: #333;
 }
 
+header {
+  background-color: #263d36;
+  background-image: url("../images/header.jpeg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10vw 2em;
+
+	h1 {
+	  color: #fff;
+	  font-size: 40px;
+	  font-weight: 300;
+	}
+
+	a {
+	  border: 1px solid #e81c4f;
+	  border-radius: 290486px;
+	  color: white;
+	  font-size: 0.6em;
+	  letter-spacing: 0.2em;
+	  padding: 1em 2em;
+	  text-transform: uppercase;
+	  text-decoration: none;
+	  transition: none 200ms ease-out;
+	  transition-property: color, background;
+
+		&:hover {
+			background:  #e81c4f;
+		  color: white;
+		}
+	}
+}
+
 .main-container {
 	width: 60%;
 	margin: 0 auto;
-	.title {
-		border-bottom: 2px solid;
-		padding: 15px;
-	}
 	.view-container {
 		width: 100%;
 		.post, .submit {
