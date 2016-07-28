@@ -1,3 +1,18 @@
+$primary: #566b78;
+$secondary: #69c;
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+
+body {
+	font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+	color: #555;
+}
+
+h1,
+h2,
+strong {
+	color: #333;
+}
+
 .main-container {
 	width: 60%;
 	margin: 0 auto;
@@ -8,8 +23,13 @@
 	.view-container {
 		width: 100%;
 		.post, .submit {
-			border-bottom: 1px solid;
 			padding: 10px 0;
+		}
+		.post {
+			background: #eee;
+			margin-top: 10px;
+			padding: 20px;
+			border-left: 2px solid #69c;
 		}
 		.home-link {
 			margin-top: 20px;

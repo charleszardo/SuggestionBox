@@ -1,18 +1,27 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  color: #555; }
+
+h1,
+h2,
+strong {
+  color: #333; }
+
 .main-container {
-    width: 60%;
-    margin: 0 auto;
-}
-.main-container .title {
+  width: 60%;
+  margin: 0 auto; }
+  .main-container .title {
     border-bottom: 2px solid;
-    padding: 15px;
-}
-.main-container .view-container {
-    width: 100%;
-}
-.main-container .view-container .post, .main-container .view-container .submit {
-    border-bottom: 1px solid;
-    padding: 10px 0;
-}
-.main-container .view-container .home-link {
-    margin-top: 20px;
-}
+    padding: 15px; }
+  .main-container .view-container {
+    width: 100%; }
+    .main-container .view-container .post, .main-container .view-container .submit {
+      padding: 10px 0; }
+    .main-container .view-container .post {
+      background: #eee;
+      margin-top: 10px;
+      padding: 20px;
+      border-left: 2px solid #69c; }
+    .main-container .view-container .home-link {
+      margin-top: 20px; }
