@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
   has_many :sessions
 
   def self.find_by_credentials(creds_hash)
-    user = User.find_by_username(creds[:username])
+    user = User.find_by_username(creds_hash[:username])
 
-    !user.nil? && user.is_password?(creds[:password]) ? user : nil
+    !user.nil? && user.is_password?(creds_hash[:password]) ? user : nil
   end
 
   def password=(password)

@@ -25,10 +25,7 @@ class ApplicationController < ActionController::Base
     session = Session.new(user: user, session_token: session_token)
 
     if session.save
-      session[:sesion_token] = session_token
-      render json: user
-    else
-      render json: session.errors.full_messages
+      session[:session_token] = session_token
     end
   end
 
