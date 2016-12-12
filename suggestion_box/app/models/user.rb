@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   has_many :sessions
+  has_many :suggestions
+  has_many :comments
 
   def self.find_by_credentials(creds_hash)
     user = User.find_by_username(creds_hash[:username])
