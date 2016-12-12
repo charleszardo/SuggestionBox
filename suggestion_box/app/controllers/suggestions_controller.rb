@@ -38,7 +38,7 @@ class SuggestionsController < ApplicationController
   def update
     @suggestion = Suggestion.find_by(params[:id])
 
-    if @suggestion.save
+    if @suggestion.update_attributes(suggestion_params)
       redirect_to suggestion_url(@suggestion)
     else
       render json: @suggestion.errors.full_messages
