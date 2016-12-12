@@ -23,6 +23,8 @@ class SessionsController < ApplicationController
         session[:session_token] = nil
       end
       destroy_session.destroy
+
+      redirect_to root_url
     end
   end
 end

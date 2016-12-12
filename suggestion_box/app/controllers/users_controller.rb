@@ -34,11 +34,19 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    old_password = user_params["old_password"]
 
-    if @user.update_attributes(user_params)
+    if !@user.is_password?(old_password)
+      flash[:error] = "Current Password is Incorrect"
+
       redirect_to user_url(@user)
     else
-      render json: @user.errors.full_messages
+      @user.assign_attributes(username: user_params["username"], password: user_params["password"])
+      if @user.save
+        redirect_to user_url(@user)
+      else
+        render json: @user.errors.full_messages
+      end
     end
   end
 end
