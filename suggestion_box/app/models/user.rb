@@ -5,6 +5,12 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  def self.find_by_credentials(creds_hash)
+    user = User.find_by_username(creds[:username])
+
+    !user.nil? && user.is_password?(creds[:password]) ? user : nil
+  end
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -12,5 +18,9 @@ class User < ActiveRecord::Base
 
   def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
+  end
+
+  def password_digest
+    BCrypt::Password.new(super)
   end
 end
