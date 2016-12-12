@@ -5,6 +5,13 @@ class SuggestionsController < ApplicationController
     render :index
   end
 
+  def show
+    @suggestion = Suggestion.find_by(params[:id])
+    @author = @suggestion.author
+
+    render :show
+  end
+
   def create
     @suggestion = Suggestion.new(suggestion_params)
     @suggestion.author = current_user
@@ -23,6 +30,12 @@ class SuggestionsController < ApplicationController
   end
 
   def edit
+    @suggestion = Suggestion.find_by(params[:id])
+
+    render :edit
+  end
+
+  def update
     @suggestion = Suggestion.find_by(params[:id])
 
     if @suggestion.save
