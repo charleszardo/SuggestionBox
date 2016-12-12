@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  has_many :sessions
+
   def self.find_by_credentials(creds_hash)
     user = User.find_by_username(creds[:username])
 
