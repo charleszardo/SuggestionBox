@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212213824) do
+ActiveRecord::Schema.define(version: 20161212214508) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "suggestion_id", null: false
+    t.text     "body",          null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "comments", ["suggestion_id"], name: "index_comments_on_suggestion_id"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_token", null: false

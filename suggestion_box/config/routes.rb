@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:destroy]
 
   resources :suggestions
+
+  resources :comments, except: [:index]
 end
