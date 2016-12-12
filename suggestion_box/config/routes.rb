@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "suggestions#index"
+
   resources :users
 
   resource :session, only: [:new, :create]
