@@ -6,7 +6,7 @@ class SuggestionsController < ApplicationController
   end
 
   def show
-    @suggestion = Suggestion.find_by(params[:id])
+    @suggestion = Suggestion.find(params[:id])
     @author = @suggestion.author
 
     render :show
@@ -30,13 +30,13 @@ class SuggestionsController < ApplicationController
   end
 
   def edit
-    @suggestion = Suggestion.find_by(params[:id])
+    @suggestion = Suggestion.find(params[:id])
 
     render :edit
   end
 
   def update
-    @suggestion = Suggestion.find_by(params[:id])
+    @suggestion = Suggestion.find(params[:id])
 
     if @suggestion.update_attributes(suggestion_params)
       redirect_to suggestion_url(@suggestion)
