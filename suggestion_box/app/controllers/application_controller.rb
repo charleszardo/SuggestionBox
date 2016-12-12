@@ -21,12 +21,10 @@ class ApplicationController < ActionController::Base
   end
 
   def login_user!(user)
-    session_token = Session.generate_session_token
-    session = Session.new(user: user, session_token: session_token)
+    token = Session.generate_session_token
+    curr_session = Session.new(user: user, session_token: token)
 
-    if session.save
-      session[:session_token] = session_token
-    end
+    session[:session_token] = token if curr_session.save
   end
 
   def user_params

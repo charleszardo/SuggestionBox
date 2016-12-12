@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def new
+    @signin_page = true
     @session = Session.new
     render :new
   end

@@ -11,6 +11,12 @@ class UsersController < ApplicationController
   end
 
   def new
+    @signin_page = true
     @user = User.new
+  end
+
+  def index
+    @users = User.all
+    render :index
   end
 end
