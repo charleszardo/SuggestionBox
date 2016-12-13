@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_no_login, only: [:create, :new]
+  before_action :require_is_current_user, only: [:edit, :update]
+
   def create
     @user = User.new(user_params)
 
@@ -48,5 +51,10 @@ class UsersController < ApplicationController
         render json: @user.errors.full_messages
       end
     end
+  end
+
+  private
+  def require_is_current_user
+    current_user == User.find(params[:id])
   end
 end

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :require_current_user_is_owner, only: [:destroy]
+  before_action :require_no_login, only: [:create, :new]
 
   def create
     user = User.find_by_credentials(user_params)

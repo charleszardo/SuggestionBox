@@ -40,6 +40,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_no_login
+    unless !logged_in?
+      add_flash_error("Please sign out to access this section")
+
+      redirect_to root_url
+    end
+  end
+
   def require_current_user_is_owner
     unless current_user_is_owner?
       add_flash_error("Access Denied!")
