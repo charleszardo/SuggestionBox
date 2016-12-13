@@ -3,8 +3,6 @@
 * Refactoring
 
   * Add various includes when fetching models
-  * Remove unnecessary routes
-  * General Cleanup
-  * Validations/Limitations
+  * Ensure user editing is working correctly
 
 * Add angular layer
