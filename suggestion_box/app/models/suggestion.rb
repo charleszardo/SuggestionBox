@@ -3,8 +3,8 @@ class Suggestion < ActiveRecord::Base
 
   belongs_to :author, class_name: "User", foreign_key: "user_id"
 
-  has_many :comments
-  has_many :votes
+  has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   def vote_count
     upvotes = self.votes.where(upvote: true).length
