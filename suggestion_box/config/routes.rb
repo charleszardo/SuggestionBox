@@ -6,7 +6,16 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create]
   resources :sessions, only: [:destroy]
 
-  resources :suggestions
+  resources :suggestions do
+    resources :votes, only: [:create]
+  end
 
   resources :comments, except: [:index]
+
+  # resources :votes, only: [] do
+  #   collection do
+  #     post "up"
+  #     post "down"
+  #   end
+  # end
 end

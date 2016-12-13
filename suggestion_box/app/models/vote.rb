@@ -1,5 +1,6 @@
 class Vote < ActiveRecord::Base
-  validates :upvote, :user, :suggestion, presence: true
+  validates :user, :suggestion, presence: true
+  validates_inclusion_of :upvote, :in => [true, false]
 
   belongs_to :user
   belongs_to :suggestion
