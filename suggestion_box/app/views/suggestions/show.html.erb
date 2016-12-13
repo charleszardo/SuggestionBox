@@ -1,4 +1,6 @@
 <h2><%= @suggestion.title %></h2>
+<%= button_to "Edit", edit_suggestion_url(@suggestion) %>
+<%= button_to "Delete", @suggestion, method: :delete %>
 <h3>by <%= link_to @author.username, user_url(@author) %></h3>
 <p><%= @suggestion.body %></p>
 <%= render "comments_votes", suggestion: @suggestion %>
@@ -9,7 +11,5 @@
   <h5>by <%= comment.author.username %></h5>
 <% end %>
 <%= render "comments/form", suggestion: @suggestion %>
-<br>
-<%= link_to "Edit Suggestion", edit_suggestion_url(@suggestion) %>
 <br>
 <%= link_to "Home", root_url %>

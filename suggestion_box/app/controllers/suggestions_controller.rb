@@ -47,6 +47,18 @@ class SuggestionsController < ApplicationController
     end
   end
 
+  def destroy
+    @suggestion = Suggestion.find(params[:id])
+
+    if @suggestion.destroy
+
+    else
+      add_flash_error(@suggestion.errors.full_messages)
+    end
+
+    redirect_to suggestions_url
+  end
+
   private
   def suggestion_params
     params.require(:suggestion).permit(:title, :body)

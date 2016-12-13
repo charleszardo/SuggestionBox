@@ -33,9 +33,18 @@ class ApplicationController < ActionController::Base
 
   def require_login
     unless logged_in?
-      (flash[:errors] ||= []) << "You must be logged in to access this section"
+      add_flash_error("You must be logged in to access this section")
 
       redirect_to new_session_url
+    end
+  end
+
+  def add_flash_error(msg)
+    flash[:errors] ||= []
+    if msg.is_a?(Array)
+      msg.each { |error| flash[:errors] << error }
+    else
+      flash[:errors] << msg
     end
   end
 end
