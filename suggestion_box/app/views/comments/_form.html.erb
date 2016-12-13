@@ -1,6 +1,6 @@
-<form class="" action="<%= comments %>" method="post">
+<form class="" action="<%= comments_url %>" method="post">
   <%= auth_token %>
-
+  <input type="hidden" name="comment[suggestion_id]" value="<%= suggestion.id %>">
   <label for="comment_body">Add Comment</label>
   <textarea id="comment_body" name="comment[body]"></textarea>
   <br>

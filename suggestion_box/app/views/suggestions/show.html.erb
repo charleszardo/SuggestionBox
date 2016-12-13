@@ -1,6 +1,11 @@
 <h3><%= @suggestion.title %></h3>
 <%= link_to @author.username, user_url(@author) %>
 <p><%= @suggestion.body %></p>
+<% @suggestion.comments.each do |comment| %>
+  <p><%= comment.body %></p>
+  <p><%= comment.author.username %></p>
+<% end %>
+<%= render "comments/form", suggestion: @suggestion %>
 <%= link_to "Edit Suggestion", edit_suggestion_url(@suggestion) %>
 <br>
 <%= link_to "Home", root_url %>
