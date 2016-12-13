@@ -11,11 +11,4 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: [:create]
-
-  # resources :votes, only: [] do
-  #   collection do
-  #     post "up"
-  #     post "down"
-  #   end
-  # end
 end
