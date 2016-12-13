@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :current_session
   helper_method :logged_in?
+  helper_method :current_user_is_owner?
 
   private
   def current_user
@@ -35,8 +36,20 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       add_flash_error("You must be logged in to access this section")
 
-      redirect_to new_session_url
+      redirect_to root_url
     end
+  end
+
+  def require_current_user_is_owner
+    unless current_user_is_owner?
+      add_flash_error("Access Denied!")
+
+      redirect_to root_url
+    end
+  end
+
+  def current_user_is_owner?
+
   end
 
   def add_flash_error(msg)

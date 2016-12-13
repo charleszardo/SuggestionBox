@@ -1,5 +1,6 @@
 class SuggestionsController < ApplicationController
-  before_action :require_login, only: [:create, :new, :update, :edit, :destroy]
+  before_action :require_login, only: [:create, :new]
+  before_action :require_current_user_is_owner, only: [:update, :edit, :destroy]
 
   def index
     @suggestions = Suggestion.all
@@ -64,5 +65,9 @@ class SuggestionsController < ApplicationController
   private
   def suggestion_params
     params.require(:suggestion).permit(:title, :body)
+  end
+
+  def current_user_is_owner?
+    current_user && current_user.is_owner?(:suggestion, Suggestion.find(params[:id]))
   end
 end

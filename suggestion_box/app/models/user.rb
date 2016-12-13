@@ -28,4 +28,8 @@ class User < ActiveRecord::Base
   def password_digest
     BCrypt::Password.new(super)
   end
+
+  def is_owner?(type, item)
+    self.send("#{type}s").include?(item)
+  end
 end
