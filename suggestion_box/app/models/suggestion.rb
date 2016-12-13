@@ -5,4 +5,11 @@ class Suggestion < ActiveRecord::Base
 
   has_many :comments
   has_many :votes
+
+  def vote_count
+    upvotes = self.votes.where(upvote: true).length
+    downvotes = self.votes.length - upvotes
+
+    upvotes - downvotes
+  end
 end
