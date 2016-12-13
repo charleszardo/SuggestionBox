@@ -21,7 +21,8 @@ class SuggestionsController < ApplicationController
     if @suggestion.save
       redirect_to suggestion_url(@suggestion)
     else
-      render json: @suggestion.errors.full_messages
+      add_flash_error(@suggestion.errors.full_messages)
+      redirect_to suggestions_url
     end
   end
 
@@ -43,7 +44,8 @@ class SuggestionsController < ApplicationController
     if @suggestion.update_attributes(suggestion_params)
       redirect_to suggestion_url(@suggestion)
     else
-      render json: @suggestion.errors.full_messages
+      add_flash_error(@suggestion.errors.full_messages)
+      redirect_to suggestion_url(@suggestion)
     end
   end
 
