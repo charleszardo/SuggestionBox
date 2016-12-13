@@ -1,5 +1,5 @@
 <h2><%= @suggestion.title %></h2>
-<% if current_user_is_owner? %>
+<% if logged_in? && current_user_is_owner? %>
 <%= link_to "Edit", edit_suggestion_url(@suggestion) %>
 <%= link_to "Delete", @suggestion, method: :delete %>
 <% end %>

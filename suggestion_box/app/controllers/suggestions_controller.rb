@@ -68,6 +68,6 @@ class SuggestionsController < ApplicationController
   end
 
   def current_user_is_owner?
-    current_user && current_user.is_owner?(:suggestion, Suggestion.find(params[:id]))
+    current_user.is_owner?(:suggestion, Suggestion.find(params[:id]))
   end
 end

@@ -49,6 +49,8 @@ class ApplicationController < ActionController::Base
   end
 
   def require_current_user_is_owner
+    require_login
+
     unless current_user_is_owner?
       add_flash_error("Access Denied!")
 

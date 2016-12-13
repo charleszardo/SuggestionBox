@@ -35,6 +35,6 @@ class SessionsController < ApplicationController
 
   private
   def current_user_is_owner?
-    current_user && current_user.is_owner?(:session, Session.find(params[:id]))
+    current_user.is_owner?(:session, Session.find(params[:id]))
   end
 end
