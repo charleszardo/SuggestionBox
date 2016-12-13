@@ -3,5 +3,6 @@
   <p><%= suggestion.body %></p>
   <%= render "comments_votes", suggestion: suggestion %>
 <% end %>
-
+<% if logged_in? %>
 <%= link_to "Make a suggestion", new_suggestion_url %>
+<% end %>

@@ -1,9 +1,12 @@
 <h2><%= @suggestion.title %></h2>
+<% if current_user_is_owner? %>
 <%= link_to "Edit", edit_suggestion_url(@suggestion) %>
 <%= link_to "Delete", @suggestion, method: :delete %>
+<% end %>
 <h3>by <%= link_to @author.username, user_url(@author) %></h3>
 <p><%= @suggestion.body %></p>
 <%= render "comments_votes", suggestion: @suggestion %>
+<% if logged_in? %>
 <%= button_to "Upvote", suggestion_votes_path(@suggestion.id, vote: { :upvote => true }), :method => :post %>
 <%= button_to "Downvote", suggestion_votes_path(@suggestion.id, vote: { :upvote => false }), :method => :post %>
 <% @suggestion.comments.each_with_index do |comment, idx| %>
@@ -11,5 +14,6 @@
   <h5>by <%= comment.author.username %></h5>
 <% end %>
 <%= render "comments/form", suggestion: @suggestion %>
+<% end %>
 <br>
 <%= link_to "Home", root_url %>
