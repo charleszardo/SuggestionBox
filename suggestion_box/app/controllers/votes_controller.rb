@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+  before_action :require_login
+
   def create
     curr_vote_obj = Vote.find_by(user: current_user,
                              suggestion_id: params[:suggestion_id])

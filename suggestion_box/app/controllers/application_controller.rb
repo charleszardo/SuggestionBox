@@ -30,4 +30,12 @@ class ApplicationController < ActionController::Base
   def user_params
     params.require(:user).permit(:username, :password, :old_password)
   end
+
+  def require_login
+    unless logged_in?
+      (flash[:errors] ||= []) << "You must be logged in to access this section"
+
+      redirect_to new_session_url
+    end
+  end
 end

@@ -1,4 +1,6 @@
 class SuggestionsController < ApplicationController
+  before_action :require_login, only: [:create, :new, :update, :edit, :destroy]
+
   def index
     @suggestions = Suggestion.all
 
