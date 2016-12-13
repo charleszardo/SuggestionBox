@@ -1,7 +1,5 @@
 == TODO
 
-* Voting model, controller, markup
-
 * Refactoring
 
   * Add various includes when fetching models
