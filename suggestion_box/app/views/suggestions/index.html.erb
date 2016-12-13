@@ -1,6 +1,7 @@
 <% @suggestions.each do |suggestion| %>
   <h3><%= link_to suggestion.title, suggestion_url(suggestion) %></h3>
   <p><%= suggestion.body %></p>
+  <%= render "comments_votes", suggestion: suggestion %>
 <% end %>
 
 <%= link_to "Make a suggestion", new_suggestion_url %>

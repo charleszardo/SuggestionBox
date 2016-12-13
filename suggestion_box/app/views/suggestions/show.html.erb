@@ -1,11 +1,13 @@
-<h3><%= @suggestion.title %></h3>
-<%= link_to @author.username, user_url(@author) %>
+<h2><%= @suggestion.title %></h2>
+<h3>by <%= link_to @author.username, user_url(@author) %></h3>
 <p><%= @suggestion.body %></p>
-<% @suggestion.comments.each do |comment| %>
-  <p><%= comment.body %></p>
-  <p><%= comment.author.username %></p>
+<%= render "comments_votes", suggestion: @suggestion %>
+<% @suggestion.comments.each_with_index do |comment, idx| %>
+  <p><%= idx + 1 %>. <%= comment.body %></p>
+  <h5>by <%= comment.author.username %></h5>
 <% end %>
 <%= render "comments/form", suggestion: @suggestion %>
+<br>
 <%= link_to "Edit Suggestion", edit_suggestion_url(@suggestion) %>
 <br>
 <%= link_to "Home", root_url %>
