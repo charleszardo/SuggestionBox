@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :sessions
   has_many :suggestions
   has_many :comments
+  has_many :votes
 
   def self.find_by_credentials(creds_hash)
     user = User.find_by_username(creds_hash[:username])
