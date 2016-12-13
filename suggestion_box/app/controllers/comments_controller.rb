@@ -8,7 +8,8 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to suggestion_url(@comment.suggestion)
     else
-      render json: @comment.errors.full_messages
+      add_flash_error(@comment.errors.full_messages)
+      redirect_to suggestion_url(@comment.suggestion)
     end
   end
 

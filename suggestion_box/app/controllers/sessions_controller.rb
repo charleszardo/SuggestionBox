@@ -7,15 +7,17 @@ class SessionsController < ApplicationController
 
     if user
       login_user!(user)
-      render json: user
+      redirect_to user_url(user)
     else
-      render json: user.errors.full_messages
+      add_flash_error(user.errors.full_messages)
+      redirect_to root_url
     end
   end
 
   def new
     @signin_page = true
     @session = Session.new
+
     render :new
   end
 

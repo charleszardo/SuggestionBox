@@ -7,19 +7,23 @@ class UsersController < ApplicationController
 
     if @user.save
       login_user!(@user)
-      render json: @user
+      redirect_to user_url(@user)
     else
-      render json: @user.errors.full_messages
+      add_flash_error(@user.errors.full_messages)
+      redirect_to root_url
     end
   end
 
   def new
     @signin_page = true
     @user = User.new
+
+    render :new
   end
 
   def index
     @users = User.all
+
     render :index
   end
 
@@ -40,7 +44,7 @@ class UsersController < ApplicationController
     old_password = user_params["old_password"]
 
     if !@user.is_password?(old_password)
-      flash[:error] = "Current Password is Incorrect"
+      add_flash_error("Current Password is Incorrect")
 
       redirect_to user_url(@user)
     else
@@ -48,7 +52,9 @@ class UsersController < ApplicationController
       if @user.save
         redirect_to user_url(@user)
       else
-        render json: @user.errors.full_messages
+        add_flash_error(@user.errors.full_messages)
+
+        redirect_to user_url(@user)
       end
     end
   end
