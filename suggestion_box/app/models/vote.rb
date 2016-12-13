@@ -1,6 +1,6 @@
 class Vote < ActiveRecord::Base
-  validates :type, :user, :suggestion, presence: true
+  validates :upvote, :user, :suggestion, presence: true
 
   belongs_to :user
-  belongs_to :sugge
+  belongs_to :suggestion
 end
