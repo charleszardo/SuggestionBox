@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
-  has_many :sessions
-  has_many :suggestions
-  has_many :comments
-  has_many :votes
+  has_many :sessions, dependent: :destroy
+  has_many :suggestions, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   def self.find_by_credentials(creds_hash)
     user = User.find_by_username(creds_hash[:username])

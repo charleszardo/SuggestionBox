@@ -3,6 +3,5 @@
 * Refactoring
 
   * Add various includes when fetching models
-  * Ensure user editing is working correctly
 
 * Add angular layer
