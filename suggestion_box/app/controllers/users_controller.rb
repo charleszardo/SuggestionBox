@@ -42,29 +42,38 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     current_password = user_params["current_password"]
-    new_password = user_params["password"]
+    @new_password = user_params["password"]
 
     if !@user.is_password?(current_password)
-      add_flash_error("Current Password is Incorrect")
-
-      redirect_to edit_user_url(@user)
+      handle_incorrect_password
     else
-      changes = { username: user_params["username"] }
-      changes[:password] = new_password unless new_password.empty?
-      @user.assign_attributes(changes)
-
-      if @user.save
-        redirect_to user_url(@user)
-      else
-        add_flash_error(@user.errors.full_messages)
-
-        redirect_to edit_user_url(@user)
-      end
+      edit_user
+      attempt_save_after_edit
     end
   end
 
   private
   def require_is_current_user
     current_user == User.find(params[:id])
+  end
+
+  def handle_incorrect_password
+    add_flash_error("Current Password is Incorrect")
+    redirect_to edit_user_url(@user)
+  end
+
+  def edit_user
+    changes = { username: user_params["username"] }
+    changes[:password] = @new_password unless @new_password.empty?
+    @user.assign_attributes(changes)
+  end
+
+  def attempt_save_after_edit
+    if @user.save
+      redirect_to user_url(@user)
+    else
+      add_flash_error(@user.errors.full_messages)
+      redirect_to edit_user_url(@user)
+    end
   end
 end
