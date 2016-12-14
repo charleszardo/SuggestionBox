@@ -6,7 +6,7 @@
 <h3>by <%= link_to @author.username, user_url(@author) %></h3>
 <p><%= @suggestion.body %></p>
 <%= render "comments_votes", suggestion: @suggestion %>
-<% @suggestion.comments.each_with_index do |comment, idx| %>
+<% @comments.each_with_index do |comment, idx| %>
   <p><%= idx + 1 %>. <%= comment.body %></p>
   <h5>by <%= comment.author.username %></h5>
 <% end %>
