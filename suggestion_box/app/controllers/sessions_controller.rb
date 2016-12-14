@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
       login_user!(user)
       redirect_to user_url(user)
     else
-      add_flash_error(user.errors.full_messages)
-      redirect_to root_url
+      add_flash_error("Incorrect Login Credentials")
+      redirect_to new_session_url
     end
   end
 
