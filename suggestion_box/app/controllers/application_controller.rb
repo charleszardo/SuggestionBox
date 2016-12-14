@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_params
-    params.require(:user).permit(:username, :password, :old_password)
+    params.require(:user).permit(:username, :password, :current_password)
   end
 
   def require_login
