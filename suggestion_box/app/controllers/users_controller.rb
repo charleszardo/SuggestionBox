@@ -28,7 +28,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(:suggestions).find(params[:id])
+    @suggestions = @user.suggestions
 
     render :show
   end
