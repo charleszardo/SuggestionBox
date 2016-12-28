@@ -37,9 +37,15 @@ app.factory('suggestions', ['$http', function($http) {
 	var o = {};
 	o.suggestions = [];
 
-	o.getAll = function() {
+	o.getAll = function () {
 		return $http.get('/suggestions.json').then(function(success) {
 			angular.copy(success.data, o.suggestions);
+		});
+	};
+
+	o.create = function(suggestion) {
+		return $http.post('/suggestions.json', suggestion).then(function(success){
+			o.suggestions.push(success.data);
 		});
 	};
 

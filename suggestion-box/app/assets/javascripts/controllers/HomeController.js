@@ -2,15 +2,12 @@ app.controller('HomeController', ['$scope', 'suggestions', function($scope, sugg
 	$scope.suggestions = suggestions.suggestions;
 
 	$scope.addSuggestion = function () {
-		if(!$scope.title || $scope.title === '') {
-			return;
-		}
-
-		$scope.suggestions.push({
+		if(!$scope.title || $scope.title === '') { return; }
+		suggestions.create({
 			title: $scope.title,
 			upvotes: 0,
 			comments: []
-		});
+		})
 
 		$scope.title = '';
 	};
