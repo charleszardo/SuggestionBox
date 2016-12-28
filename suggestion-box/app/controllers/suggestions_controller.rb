@@ -4,9 +4,6 @@ class SuggestionsController < ApplicationController
 
   def index
     respond_with Suggestion.all
-    # @suggestions = Suggestion.all
-    #
-    # render :index
   end
 
   def show
@@ -26,15 +23,6 @@ class SuggestionsController < ApplicationController
     suggestion.save
 
     respond_with suggestion
-    # @suggestion = Suggestion.new(suggestion_params)
-    # @suggestion.author = current_user
-    #
-    # if @suggestion.save
-    #   redirect_to suggestion_url(@suggestion)
-    # else
-    #   add_flash_error(@suggestion.errors.full_messages)
-    #   redirect_to suggestions_url
-    # end
   end
 
   def new
