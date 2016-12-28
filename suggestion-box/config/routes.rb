@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root "suggestions#index"
-
+  # root "suggestions#index"
+  root to: 'application#angular'
+  
   resources :users
 
   resource :session, only: [:new, :create]

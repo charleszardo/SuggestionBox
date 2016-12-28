@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
   helper_method :current_user_is_owner?
 
+  def angular
+    render 'layouts/application'
+  end
+
   private
   def current_user
     @current_user ||= current_session.user if current_session

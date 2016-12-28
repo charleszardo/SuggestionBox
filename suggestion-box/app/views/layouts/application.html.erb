@@ -1,21 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SuggestionBox</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta charset="utf-8">
+  <title>Suggestion Box</title>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+  <script src="https://code.angularjs.org/1.2.28/angular-route.min.js"></script>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <% if @signin_page %>
-  <% elsif current_user %>
-    <a href="<%= user_url(current_user) %>"><%= current_user.username %></a>
-    <%= button_to "logout", "/sessions/#{current_session.id}", :method => :delete %>
-  <% else %>
-    <%= button_to "sign up", new_user_url, :method => :get %>
-    <%= button_to "sign in", new_session_url, :method => :get %>
-  <% end %>
-  <%= render "shared/errors" %>
-  <%= yield %>
+<body ng-app="SuggestionBox">
+  <header class="text-center">
+    <h1>Suggestion Box</h1>
+  </header>
+  <div class="main-container">
+    <div class="container view-container">
+      <ui-view></ui-view>
+    </div>
+  </div>
+
+  <script type="text/ng-template" id="/home.html">
+    <div class="posts" ng-repeat="post in posts | orderBy: '-upvotes'">
+    	<div class="row post">
+    		<h3>{{ post.title }}</h3>
+    		<p>
+    			<span class="glyphicon glyphicon-plus-sign" 	ng-click="upVote(post)"></span>
+    			<span>
+    				Upvotes: {{ post.upvotes }} | <a ng-href="#/suggestion/{{getPostIndex(post)}}">Comments ( {{ post.comments.length }} )</a>
+    			</span>
+    		</p>
+    	</div>
+    </div>
+    <div class="row submit">
+    	<form ng-submit="addSuggestion()" style="margin-top: 50px">
+    		<h3>Submit Your Suggestion</h3>
+    		<div class="form-group">
+    			<input type="text" class="form-control" placeholder="Make a suggestion here" ng-model="title"></input>
+    		</div>
+    		<button type="submit" class="btn btn-primary">Suggest</button>
+    	</form>
+    </div>
+  </script>
+
+  <script type="text/ng-template" id="/suggestion.html">
+    <div class="row submit">
+    	<h3>{{ post.title }}</h3>
+    	<form ng-submit="addComment(post)" style="margin-top: 50px">
+    		<div class="form-group">
+    			<input type="text" class="form-control" placeholder="Add a comment here" ng-model="postBody"></input>
+    		</div>
+    		<button type="submit" class="btn btn-primary">Comment</button>
+    	</form>
+    </div>
+    <div class="row">
+    	<h5>Comments ( {{ post.comments.length }} ):</h5>
+    </div>
+    <div class="comments" ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+    	<div class="row post">
+    		<p>{{ comment.body }}</p>
+    		<p>
+    			<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span> Upvotes: {{ comment.upvotes }}
+    		</p>
+    	</div>
+    </div>
+    <div class="row home-link">
+    	<a href="#/">Home</a>
+    </div>
+  </script>
 </body>
 </html>
