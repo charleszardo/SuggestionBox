@@ -1,4 +1,4 @@
-app.factory('suggestions', [function() {
+app.factory('suggestions', ['$http', function($http) {
 	var demoSuggestions = {
 		posts: [
 			{
@@ -33,6 +33,15 @@ app.factory('suggestions', [function() {
 			},
 		]
 	}
-	
-	return demoSuggestions;
+
+	var o = {};
+	o.suggestions = [];
+
+	o.getAll = function() {
+		return $http.get('/suggestions.json').then(function(success) {
+			angular.copy(success.data, o.suggestions);
+		});
+	};
+
+	return o;
 }]);

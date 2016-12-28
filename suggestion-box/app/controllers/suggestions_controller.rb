@@ -1,66 +1,84 @@
 class SuggestionsController < ApplicationController
-  before_action :require_login, only: [:create, :new]
-  before_action :require_current_user_is_owner, only: [:update, :edit, :destroy]
+  # before_action :require_login, only: [:create, :new]
+  # before_action :require_current_user_is_owner, only: [:update, :edit, :destroy]
 
   def index
-    @suggestions = Suggestion.all
-
-    render :index
+    respond_with Suggestion.all
+    # @suggestions = Suggestion.all
+    #
+    # render :index
   end
 
   def show
-    @suggestion = Suggestion.includes(:author, :comments => [:author]).find(params[:id])
-    @author = @suggestion.author
-    @comments = @suggestion.comments
+    suggestion = Suggestion.includes(:author, :comments => [:author]).find(params[:id])
 
-    render :show
+    respond_with suggestion
+    # @suggestion = Suggestion.includes(:author, :comments => [:author]).find(params[:id])
+    # @comments = @suggestion.comments
+    #
+    # render :show
   end
 
   def create
-    @suggestion = Suggestion.new(suggestion_params)
-    @suggestion.author = current_user
+    suggestion = Suggestion.new(suggestion_params)
+    suggestion.author = 'TEST'
+    suggestion.save
 
-    if @suggestion.save
-      redirect_to suggestion_url(@suggestion)
-    else
-      add_flash_error(@suggestion.errors.full_messages)
-      redirect_to suggestions_url
-    end
+    respond_with suggestion
+    # @suggestion = Suggestion.new(suggestion_params)
+    # @suggestion.author = current_user
+    #
+    # if @suggestion.save
+    #   redirect_to suggestion_url(@suggestion)
+    # else
+    #   add_flash_error(@suggestion.errors.full_messages)
+    #   redirect_to suggestions_url
+    # end
   end
 
   def new
-    @suggestion = Suggestion.new
-
-    render :new
+    respond_with Suggestion.new
+    # @suggestion = Suggestion.new
+    #
+    # render :new
   end
 
   def edit
-    @suggestion = Suggestion.find(params[:id])
-
-    render :edit
+    respond_with Suggestion.find(params[:id])
+    # @suggestion = Suggestion.find(params[:id])
+    #
+    # render :edit
   end
 
   def update
-    @suggestion = Suggestion.find(params[:id])
+    suggestion = Suggestion.find(params[:id])
+    suggestion.update_attributes(suggestion_params)
 
-    if @suggestion.update_attributes(suggestion_params)
-      redirect_to suggestion_url(@suggestion)
-    else
-      add_flash_error(@suggestion.errors.full_messages)
-      redirect_to suggestion_url(@suggestion)
-    end
+    respond_with suggestion
+    # @suggestion = Suggestion.find(params[:id])
+    #
+    # if @suggestion.update_attributes(suggestion_params)
+    #   redirect_to suggestion_url(@suggestion)
+    # else
+    #   add_flash_error(@suggestion.errors.full_messages)
+    #   redirect_to suggestion_url(@suggestion)
+    # end
   end
 
   def destroy
-    @suggestion = Suggestion.find(params[:id])
+    suggestion = Suggestion.find(params[:id])
+    suggestion.destroy
 
-    if @suggestion.destroy
-
-    else
-      add_flash_error(@suggestion.errors.full_messages)
-    end
-
-    redirect_to suggestions_url
+    respond_with suggestion
+    # @suggestion = Suggestion.find(params[:id])
+    #
+    # if @suggestion.destroy
+    #
+    # else
+    #   add_flash_error(@suggestion.errors.full_messages)
+    # end
+    #
+    # redirect_to suggestions_url
   end
 
   private

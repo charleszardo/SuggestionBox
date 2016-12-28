@@ -9,7 +9,12 @@ app.config([
       .state('home', {
         url: '/home',
         templateUrl: 'home/_home.html',
-        controller: 'HomeController'
+        controller: 'HomeController',
+        resolve: {
+          suggestionPromise: ['suggestions', function(suggestions){
+            return suggestions.getAll();
+          }]
+        }
       })
       .state('suggestions', {
         url: '/suggestion/{id}',
