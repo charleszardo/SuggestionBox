@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SuggestionBox</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if @signin_page %>
+  <% elsif current_user %>
+    <a href="<%= user_url(current_user) %>"><%= current_user.username %></a>
+    <%= button_to "logout", "/sessions/#{current_session.id}", :method => :delete %>
+  <% else %>
+    <%= button_to "sign up", new_user_url, :method => :get %>
+    <%= button_to "sign in", new_session_url, :method => :get %>
+  <% end %>
+  <%= render "shared/errors" %>
+  <%= yield %>
+</body>
+</html>

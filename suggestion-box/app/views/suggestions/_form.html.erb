@@ -1,0 +1,20 @@
+<% action = suggestion.persisted? ? suggestion_url(suggestion) : suggestions_url %>
+
+<form class="" action="<%= action %>" method="post">
+  <%= auth_token %>
+
+  <% if suggestion.persisted? %>
+    <% submit_text = "Update Suggestion" %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% else %>
+    <% submit_text = "Create Suggestion" %>
+  <% end %>
+
+  <label for="suggestion_title">Title</label>
+  <input type="text" name="suggestion[title]" value="<%= suggestion.title %>">
+  <br>
+  <label for="suggestion_body">Body</label>
+  <textarea name="suggestion[body]"><%= suggestion.body %></textarea>
+  <br>
+  <input type="submit" value="<%= submit_text %>">
+</form>

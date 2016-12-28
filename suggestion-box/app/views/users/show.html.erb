@@ -1,0 +1,10 @@
+<h3><%= @user.username %></h3>
+<h4>Suggestions:</h4>
+<% @suggestions.each do |suggestion| %>
+  <%= link_to suggestion.title, suggestion_url(suggestion) %>
+  <br>
+<% end %>
+<br>
+<%= link_to "Edit", edit_user_url(@user) %>
+<br>
+<%= link_to "Home", root_url %>
