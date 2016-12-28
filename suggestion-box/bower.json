@@ -1,0 +1,22 @@
+{
+  "name": "suggestion-box",
+  "homepage": "https://github.com/charleszardo/suggestionBox",
+  "authors": [
+    "Dave Charnuska <davecharnuska@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-ui-router": "^0.3.2",
+    "bootstrap": "^3.3.7"
+  }
+}
