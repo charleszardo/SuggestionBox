@@ -16,54 +16,5 @@
       <ui-view></ui-view>
     </div>
   </div>
-
-  <script type="text/ng-template" id="/home.html">
-    <div class="posts" ng-repeat="post in posts | orderBy: '-upvotes'">
-    	<div class="row post">
-    		<h3>{{ post.title }}</h3>
-    		<p>
-    			<span class="glyphicon glyphicon-plus-sign" 	ng-click="upVote(post)"></span>
-    			<span>
-    				Upvotes: {{ post.upvotes }} | <a ng-href="#!/suggestion/{{getPostIndex(post)}}">Comments ( {{ post.comments.length }} )</a>
-    			</span>
-    		</p>
-    	</div>
-    </div>
-    <div class="row submit">
-    	<form ng-submit="addSuggestion()" style="margin-top: 50px">
-    		<h3>Submit Your Suggestion</h3>
-    		<div class="form-group">
-    			<input type="text" class="form-control" placeholder="Make a suggestion here" ng-model="title"></input>
-    		</div>
-    		<button type="submit" class="btn btn-primary">Suggest</button>
-    	</form>
-    </div>
-  </script>
-
-  <script type="text/ng-template" id="/suggestion.html">
-    <div class="row submit">
-    	<h3>{{ post.title }}</h3>
-    	<form ng-submit="addComment(post)" style="margin-top: 50px">
-    		<div class="form-group">
-    			<input type="text" class="form-control" placeholder="Add a comment here" ng-model="postBody"></input>
-    		</div>
-    		<button type="submit" class="btn btn-primary">Comment</button>
-    	</form>
-    </div>
-    <div class="row">
-    	<h5>Comments ( {{ post.comments.length }} ):</h5>
-    </div>
-    <div class="comments" ng-repeat="comment in post.comments | orderBy: '-upvotes'">
-    	<div class="row post">
-    		<p>{{ comment.body }}</p>
-    		<p>
-    			<span class="glyphicon glyphicon-plus-sign" ng-click="upVote(comment)"></span> Upvotes: {{ comment.upvotes }}
-    		</p>
-    	</div>
-    </div>
-    <div class="row home-link">
-    	<a href="#/">Home</a>
-    </div>
-  </script>
 </body>
 </html>

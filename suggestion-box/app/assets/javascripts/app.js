@@ -8,12 +8,12 @@ app.config([
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: '/home.html',
+        templateUrl: 'home/_home.html',
         controller: 'HomeController'
       })
       .state('suggestions', {
         url: '/suggestion/{id}',
-        templateUrl: '/suggestion.html',
+        templateUrl: 'suggestions/_suggestion.html',
         controller: 'SuggestionController'
       })
 
