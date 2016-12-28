@@ -1,5 +1,5 @@
 <div class="row submit">
-  <h3>{{ post.title }}</h3>
+  <h3>{{ suggestion.title }}</h3>
   <form ng-submit="addComment(post)" style="margin-top: 50px">
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Add a comment here" ng-model="postBody"></input>
@@ -8,7 +8,7 @@
   </form>
 </div>
 <div class="row">
-  <h5>Comments ( {{ post.comments.length }} ):</h5>
+  <h5>Comments ( {{ suggestion.comments.length }} ):</h5>
 </div>
 <div class="comments" ng-repeat="comment in post.comments | orderBy: '-upvotes'">
   <div class="row post">

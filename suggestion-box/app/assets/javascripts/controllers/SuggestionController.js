@@ -1,13 +1,13 @@
-app.controller('SuggestionController', ['$scope', '$stateParams', 'suggestions',
-	function($scope, $stateParams, suggestions) {
-		$scope.post = suggestions.posts[$stateParams.id];
+app.controller('SuggestionController', ['$scope', 'suggestions', 'suggestion',
+	function($scope, suggestions, suggestion) {
+		$scope.suggestion = suggestion;
 
-		$scope.addComment = function(post) {
+		$scope.addComment = function(suggestion) {
 			if (!$scope.postBody || $scope.postBody === '') {
 				return;
 			}
 
-			post.comments.push({
+			suggestion.comments.push({
 				body: $scope.postBody,
 				upvotes: 0
 			});

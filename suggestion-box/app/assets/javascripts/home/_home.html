@@ -1,10 +1,10 @@
 <div class="suggestions" ng-repeat="suggestion in suggestions | orderBy: '-upvotes'">
   <div class="row suggestion">
-    <h3>{{ suggestion.title }}</h3>
+    <h3><a ng-href="#!/suggestion/{{ suggestion.id }}">{{ suggestion.title }}</a></h3>
     <p>
       <span class="glyphicon glyphicon-plus-sign" 	ng-click="upVote(suggestion)"></span>
       <span>
-        Upvotes: {{ suggestion.upvotes }} | <a ng-href="#!/suggestion/{{getSuggestionIndex(suggestion)}}">Comments ( {{ suggestion.comments.length }} )</a>
+        Upvotes: {{ suggestion.upvotes }} | Comments ( {{ suggestion.comments.length }} )
       </span>
     </p>
   </div>

@@ -11,7 +11,7 @@ app.config([
         templateUrl: 'home/_home.html',
         controller: 'HomeController',
         resolve: {
-          suggestionPromise: ['suggestions', function(suggestions){
+          suggestionsPromise: ['suggestions', function(suggestions) {
             return suggestions.getAll();
           }]
         }
@@ -19,7 +19,12 @@ app.config([
       .state('suggestions', {
         url: '/suggestion/{id}',
         templateUrl: 'suggestions/_suggestion.html',
-        controller: 'SuggestionController'
+        controller: 'SuggestionController',
+        resolve: {
+          suggestion: ['$stateParams', 'suggestions', function($stateParams, suggestions) {
+            return suggestions.get($stateParams.id);
+          }]
+        }
       })
 
     $urlRouterProvider.otherwise('home');
