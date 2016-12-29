@@ -9,7 +9,7 @@ app.config([
       .state('home', {
         url: '/home',
         templateUrl: 'home/_home.html',
-        controller: 'HomeController',
+        controller: 'HomeCtrl',
         resolve: {
           suggestionsPromise: ['suggestions', function(suggestions) {
             return suggestions.getAll();
@@ -19,7 +19,7 @@ app.config([
       .state('suggestions', {
         url: '/suggestion/{id}',
         templateUrl: 'suggestions/_suggestion.html',
-        controller: 'SuggestionController',
+        controller: 'SuggestionCtrl',
         resolve: {
           suggestion: ['$stateParams', 'suggestions', function($stateParams, suggestions) {
             return suggestions.get($stateParams.id);
@@ -29,7 +29,7 @@ app.config([
       .state('suggestionEdit', {
         url: '/suggestion/{id}/edit',
         templateUrl: 'suggestions/_edit.html',
-        controller: 'SuggestionController',
+        controller: 'SuggestionCtrl',
         resolve: {
           suggestion: ['$stateParams', 'suggestions', function($stateParams, suggestions) {
             return suggestions.get($stateParams.id);

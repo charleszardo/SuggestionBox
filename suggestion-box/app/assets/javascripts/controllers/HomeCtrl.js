@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', 'suggestions', 'voting', function($scope, suggestions, voting) {
+app.controller('HomeCtrl', ['$scope', 'suggestions', 'voting', function($scope, suggestions, voting) {
 	$scope.suggestions = suggestions.suggestions;
 
 	$scope.addSuggestion = function () {

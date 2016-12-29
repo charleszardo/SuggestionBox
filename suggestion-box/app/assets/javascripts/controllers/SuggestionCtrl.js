@@ -1,4 +1,4 @@
-app.controller('SuggestionController', ['$scope', '$state', 'suggestions', 'suggestion',
+app.controller('SuggestionCtrl', ['$scope', '$state', 'suggestions', 'suggestion',
 	function($scope, $state, suggestions, suggestion) {
 		$scope.suggestion = suggestion;
 		$scope.notification = ' '
