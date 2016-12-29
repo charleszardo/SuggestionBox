@@ -26,8 +26,6 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 		};
 
 		$scope.deleteSuggestion = function() {
-			SuggestionsService.delete(suggestion).then(function(success) {
-				$state.go('home');
-			});
+			SuggestionsService.delete(suggestion)
 		}
 }]);

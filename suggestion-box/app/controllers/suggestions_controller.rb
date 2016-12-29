@@ -38,7 +38,7 @@ class SuggestionsController < ApplicationController
   def destroy
     suggestion = Suggestion.find(params[:id])
     suggestion.destroy
-
+    
     respond_with suggestion
   end
 
