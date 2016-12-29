@@ -17,6 +17,10 @@ app.controller('HomeController', ['$scope', 'suggestions', 'voting', function($s
 		voting.vote(suggestion, true);
 	};
 
+	$scope.downVote = function(suggestion) {
+		voting.vote(suggestion, false);
+	};
+
 	$scope.getSuggestionIndex = function(suggestion) {
 		return $scope.suggestions.indexOf(suggestion);
 	};
