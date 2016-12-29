@@ -1,4 +1,4 @@
-<div class="suggestions" ng-repeat="suggestion in suggestions | orderBy: '-upvotes'">
+<div class="suggestions" ng-repeat="suggestion in suggestions | orderBy: '-vote_count'">
   <div class="row suggestion">
     <h3><a ng-href="#!/suggestion/{{ suggestion.id }}">{{ suggestion.title }}</a></h3>
     <p>
