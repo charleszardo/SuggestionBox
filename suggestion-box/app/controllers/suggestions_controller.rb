@@ -40,15 +40,6 @@ class SuggestionsController < ApplicationController
     suggestion.destroy
 
     respond_with suggestion
-    # @suggestion = Suggestion.find(params[:id])
-    #
-    # if @suggestion.destroy
-    #
-    # else
-    #   add_flash_error(@suggestion.errors.full_messages)
-    # end
-    #
-    # redirect_to suggestions_url
   end
 
   private

@@ -11,7 +11,7 @@ app.factory('suggestions', ['$http', function($http) {
 	o.get = function (id) {
 		return $http.get('/suggestions/' + id + '.json').then(function(success) {
 			return success.data;
-		})
+		});
 	};
 
 	o.create = function(suggestion) {
@@ -25,7 +25,13 @@ app.factory('suggestions', ['$http', function($http) {
 	o.update = function(suggestion) {
 		return $http.put('/suggestions/'+ suggestion.id + '.json', suggestion).then(function(success) {
 			return success.data;
-		})
+		});
+	};
+
+	o.delete = function(suggestion) {
+		return $http.delete('/suggestions/' + suggestion.id + '.json').then(function(success) {
+			return success.data;
+		});
 	}
 	return o;
 }]);

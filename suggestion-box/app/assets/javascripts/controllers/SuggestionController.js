@@ -26,6 +26,12 @@ app.controller('SuggestionController', ['$scope', '$state', 'suggestions', 'sugg
 				$scope.title = '';
 				$scope.body = '';
 				$state.go('suggestions', { id: $scope.suggestion.id })
-			})
+			});
+		};
+
+		$scope.deleteSuggestion = function() {
+			suggestions.delete(suggestion).then(function(success) {
+				$state.go('home');
+			});
 		}
 }]);
