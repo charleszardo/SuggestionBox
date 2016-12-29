@@ -1,4 +1,4 @@
-app.factory('suggestions', ['$http', function($http) {
+app.factory('SuggestionsService', ['$http', function($http) {
 	var o = {};
 	o.suggestions = [];
 

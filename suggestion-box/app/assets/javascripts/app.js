@@ -11,8 +11,8 @@ app.config([
         templateUrl: 'home/_home.html',
         controller: 'HomeCtrl',
         resolve: {
-          suggestionsPromise: ['suggestions', function(suggestions) {
-            return suggestions.getAll();
+          suggestionsPromise: ['SuggestionsService', function(SuggestionsService) {
+            return SuggestionsService.getAll();
           }]
         }
       })
@@ -21,8 +21,8 @@ app.config([
         templateUrl: 'suggestions/_suggestion.html',
         controller: 'SuggestionCtrl',
         resolve: {
-          suggestion: ['$stateParams', 'suggestions', function($stateParams, suggestions) {
-            return suggestions.get($stateParams.id);
+          suggestion: ['$stateParams', 'SuggestionsService', function($stateParams, SuggestionsService) {
+            return SuggestionsService.get($stateParams.id);
           }]
         }
       })
@@ -31,8 +31,8 @@ app.config([
         templateUrl: 'suggestions/_edit.html',
         controller: 'SuggestionCtrl',
         resolve: {
-          suggestion: ['$stateParams', 'suggestions', function($stateParams, suggestions) {
-            return suggestions.get($stateParams.id);
+          suggestion: ['$stateParams', 'SuggestionsService', function($stateParams, SuggestionsService) {
+            return SuggestionsService.get($stateParams.id);
           }]
         }
       })

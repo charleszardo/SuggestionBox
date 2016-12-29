@@ -1,5 +1,5 @@
-app.controller('SuggestionCtrl', ['$scope', '$state', 'suggestions', 'suggestion',
-	function($scope, $state, suggestions, suggestion) {
+app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'suggestion',
+	function($scope, $state, SuggestionsService, suggestion) {
 		$scope.suggestion = suggestion;
 		$scope.notification = ' '
 
@@ -22,7 +22,7 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'suggestions', 'suggestion
 
 		$scope.editSuggestion = function() {
 			if(!$scope.suggestion.title || $scope.suggestion.title === '') { return; }
-			suggestions.update(suggestion).then(function(success) {
+			SuggestionsService.update(suggestion).then(function(success) {
 				$scope.title = '';
 				$scope.body = '';
 				$state.go('suggestions', { id: $scope.suggestion.id })
@@ -30,7 +30,7 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'suggestions', 'suggestion
 		};
 
 		$scope.deleteSuggestion = function() {
-			suggestions.delete(suggestion).then(function(success) {
+			SuggestionsService.delete(suggestion).then(function(success) {
 				$state.go('home');
 			});
 		}

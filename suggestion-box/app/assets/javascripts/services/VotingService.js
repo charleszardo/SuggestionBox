@@ -1,4 +1,4 @@
-app.factory('voting', ['$http', function($http) {
+app.factory('VotingService', ['$http', function($http) {
 	var o = {};
 
 	o.vote = function(suggestion, val) {
