@@ -2,15 +2,21 @@ class CommentsController < ApplicationController
   before_action :require_login
 
   def create
-    @comment = Comment.new(comment_params)
-    @comment.author = current_user
+    suggestion = Suggestion.find(params[:suggestion_id])
+    comment = suggestion.comments.new(comment_params)
+    comment.author = User.all.first
+    comment.save
 
-    if @comment.save
-      redirect_to suggestion_url(@comment.suggestion)
-    else
-      add_flash_error(@comment.errors.full_messages)
-      redirect_to suggestion_url(@comment.suggestion)
-    end
+    p suggestion
+    p comment
+    respond_to suggestion, comment
+
+    # if @comment.save
+    #   redirect_to suggestion_url(@comment.suggestion)
+    # else
+    #   add_flash_error(@comment.errors.full_messages)
+    #   redirect_to suggestion_url(@comment.suggestion)
+    # end
   end
 
   private

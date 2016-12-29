@@ -4,16 +4,21 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 		$scope.notification = ' '
 
 		$scope.addComment = function(suggestion) {
-			if (!$scope.postBody || $scope.postBody === '') {
+			if (!$scope.commentBody || $scope.commentBody === '') {
 				return;
 			}
 
-			suggestion.comments.push({
-				body: $scope.postBody,
-				upvotes: 0
-			});
-
-			$scope.postBody = '';
+			SuggestionsService.addComment(suggestion, {
+				body: $scope.commentBody
+			}).then(function(success) {
+				
+			})
+			// suggestion.comments.push({
+			// 	body: $scope.postBody,
+			// 	upvotes: 0
+			// });
+			//
+			// $scope.postBody = '';
 		};
 
 		$scope.editSuggestion = function() {

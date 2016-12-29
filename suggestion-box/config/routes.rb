@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   resources :suggestions, except: [:new] do
     resources :votes, only: [:create]
+    resources :comments, only: [:show, :create]
   end
 
-  resources :comments, only: [:create]
+  resources :comments, only: [:show] do
+    resources :votes, only: [:create]
+  end
 end
