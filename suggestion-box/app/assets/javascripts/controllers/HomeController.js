@@ -5,9 +5,7 @@ app.controller('HomeController', ['$scope', 'suggestions', 'voting', function($s
 		if(!$scope.title || $scope.title === '') { return; }
 		suggestions.create({
 			title: $scope.title,
-			body: $scope.body,
-			upvotes: 0,
-			comments: []
+			body: $scope.body
 		})
 
 		$scope.title = '';

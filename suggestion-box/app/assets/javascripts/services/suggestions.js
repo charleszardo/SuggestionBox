@@ -16,6 +16,8 @@ app.factory('suggestions', ['$http', function($http) {
 
 	o.create = function(suggestion) {
 		return $http.post('/suggestions.json', suggestion).then(function(success){
+			success.data.vote_count = 0;
+			success.data.comments = [];
 			o.suggestions.push(success.data);
 		});
 	};
