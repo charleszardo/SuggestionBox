@@ -3,7 +3,7 @@ class SuggestionsController < ApplicationController
   # before_action :require_current_user_is_owner, only: [:update, :edit, :destroy]
 
   def index
-    @suggestions = Suggestion.includes(:votes).all
+    @suggestions = Suggestion.includes(:author, :votes, :comments).all
 
     respond_with :index
   end
