@@ -1,5 +1,5 @@
-app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'suggestion',
-	function($scope, $state, SuggestionsService, suggestion) {
+app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'VotingService', 'suggestion',
+	function($scope, $state, SuggestionsService, VotingService, suggestion) {
 		$scope.suggestion = suggestion;
 		$scope.notification = ' '
 
@@ -16,8 +16,12 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 			$scope.postBody = '';
 		};
 
-		$scope.upVote = function(comment) {
-			comment.upvotes += 1;
+		$scope.upVote = function(suggestion) {
+			VotingService.vote(suggestion, true);
+		};
+
+		$scope.downVote = function(suggestion) {
+			VotingService.vote(suggestion, false);
 		};
 
 		$scope.editSuggestion = function() {

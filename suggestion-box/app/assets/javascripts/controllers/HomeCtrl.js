@@ -1,6 +1,5 @@
 app.controller('HomeCtrl', ['$scope', 'SuggestionsService', 'VotingService', function($scope, SuggestionsService, VotingService) {
 	$scope.suggestions = SuggestionsService.suggestions;
-
 	$scope.addSuggestion = function () {
 		if(!$scope.title || $scope.title === '') { return; }
 		SuggestionsService.create({
