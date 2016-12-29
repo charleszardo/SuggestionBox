@@ -9,9 +9,9 @@ class SuggestionsController < ApplicationController
   end
 
   def show
-    suggestion = Suggestion.includes(:author, :votes, :comments => [:author]).find(params[:id])
+    @suggestion = Suggestion.includes(:author, :votes, :comments => [:author]).find(params[:id])
 
-    respond_with suggestion
+    respond_with :show
   end
 
   def create
