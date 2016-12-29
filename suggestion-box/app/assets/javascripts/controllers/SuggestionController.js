@@ -1,5 +1,5 @@
-app.controller('SuggestionController', ['$scope', 'suggestions', 'suggestion',
-	function($scope, suggestions, suggestion) {
+app.controller('SuggestionController', ['$scope', '$state', 'suggestions', 'suggestion',
+	function($scope, $state, suggestions, suggestion) {
 		$scope.suggestion = suggestion;
 		$scope.notification = ' '
 
@@ -23,10 +23,9 @@ app.controller('SuggestionController', ['$scope', 'suggestions', 'suggestion',
 		$scope.editSuggestion = function() {
 			if(!$scope.suggestion.title || $scope.suggestion.title === '') { return; }
 			suggestions.update(suggestion).then(function(success) {
-				$scope.notification = "Suggestion Updated!"
-
 				$scope.title = '';
 				$scope.body = '';
+				$state.go('suggestions', { id: $scope.suggestion.id })
 			})
 		}
 }]);
