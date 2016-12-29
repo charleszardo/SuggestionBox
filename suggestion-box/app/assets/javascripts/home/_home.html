@@ -2,9 +2,9 @@
   <div class="row suggestion">
     <h3><a ng-href="#!/suggestion/{{ suggestion.id }}">{{ suggestion.title }}</a></h3>
     <p>
-      <span class="glyphicon glyphicon-plus-sign" 	ng-click="upVote(suggestion)"></span>
+      <span class="glyphicon glyphicon-plus-sign" ng-click="upVote(suggestion)"></span>
       <span>
-        Upvotes: {{ suggestion.upvotes }} | Comments ( {{ suggestion.comments.length }} )
+        Upvotes: {{ suggestion.vote_count }} | Comments ( {{ suggestion.comments.length }} )
       </span>
     </p>
   </div>

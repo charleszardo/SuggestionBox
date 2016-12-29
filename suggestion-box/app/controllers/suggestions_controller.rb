@@ -3,11 +3,13 @@ class SuggestionsController < ApplicationController
   # before_action :require_current_user_is_owner, only: [:update, :edit, :destroy]
 
   def index
-    respond_with Suggestion.all
+    @suggestions = Suggestion.includes(:votes).all
+
+    respond_with :index
   end
 
   def show
-    suggestion = Suggestion.includes(:author, :comments => [:author]).find(params[:id])
+    suggestion = Suggestion.includes(:author, :votes, :comments => [:author]).find(params[:id])
 
     respond_with suggestion
   end
