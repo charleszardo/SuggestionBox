@@ -24,6 +24,9 @@ app.controller('SuggestionController', ['$scope', 'suggestions', 'suggestion',
 			if(!$scope.suggestion.title || $scope.suggestion.title === '') { return; }
 			suggestions.update(suggestion).then(function(success) {
 				$scope.notification = "Suggestion Updated!"
+
+				$scope.title = '';
+				$scope.body = '';
 			})
 		}
 }]);
