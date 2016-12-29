@@ -1,6 +1,7 @@
 app.controller('SuggestionController', ['$scope', 'suggestions', 'suggestion',
 	function($scope, suggestions, suggestion) {
 		$scope.suggestion = suggestion;
+		$scope.notification = ' '
 
 		$scope.addComment = function(suggestion) {
 			if (!$scope.postBody || $scope.postBody === '') {
@@ -18,4 +19,11 @@ app.controller('SuggestionController', ['$scope', 'suggestions', 'suggestion',
 		$scope.upVote = function(comment) {
 			comment.upvotes += 1;
 		};
+
+		$scope.editSuggestion = function() {
+			if(!$scope.suggestion.title || $scope.suggestion.title === '') { return; }
+			suggestions.update(suggestion).then(function(success) {
+				$scope.notification = "Suggestion Updated!"
+			})
+		}
 }]);

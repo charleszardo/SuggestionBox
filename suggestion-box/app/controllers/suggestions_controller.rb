@@ -10,14 +10,11 @@ class SuggestionsController < ApplicationController
     suggestion = Suggestion.includes(:author, :comments => [:author]).find(params[:id])
 
     respond_with suggestion
-    # @suggestion = Suggestion.includes(:author, :comments => [:author]).find(params[:id])
-    # @comments = @suggestion.comments
-    #
-    # render :show
   end
 
   def create
     suggestion = Suggestion.new(suggestion_params)
+
     # CHANGE BELOW AFTER IMPLEMENTING USERS
     suggestion.author = User.all.first
     suggestion.save
@@ -25,18 +22,8 @@ class SuggestionsController < ApplicationController
     respond_with suggestion
   end
 
-  def new
-    respond_with Suggestion.new
-    # @suggestion = Suggestion.new
-    #
-    # render :new
-  end
-
   def edit
     respond_with Suggestion.find(params[:id])
-    # @suggestion = Suggestion.find(params[:id])
-    #
-    # render :edit
   end
 
   def update
@@ -44,14 +31,6 @@ class SuggestionsController < ApplicationController
     suggestion.update_attributes(suggestion_params)
 
     respond_with suggestion
-    # @suggestion = Suggestion.find(params[:id])
-    #
-    # if @suggestion.update_attributes(suggestion_params)
-    #   redirect_to suggestion_url(@suggestion)
-    # else
-    #   add_flash_error(@suggestion.errors.full_messages)
-    #   redirect_to suggestion_url(@suggestion)
-    # end
   end
 
   def destroy

@@ -1,6 +1,7 @@
 <div class="row submit">
   <h3>{{ suggestion.title }}</h3>
   <p>{{ suggestion.body }}</p>
+  <a ng-href="#!/suggestion/{{ suggestion.id }}/edit">edit</a>
   <form ng-submit="addComment(post)" style="margin-top: 50px">
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Add a comment here" ng-model="postBody"></input>
@@ -20,5 +21,5 @@
   </div>
 </div>
 <div class="row home-link">
-  <a href="#/">Home</a>
+  <a href="#!/home">Home</a>
 </div>

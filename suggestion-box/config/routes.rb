@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   # root "suggestions#index"
   root to: 'application#angular'
-  
-  resources :users
 
-  resource :session, only: [:new, :create]
-  resources :sessions, only: [:destroy]
+  # resources :users
+  #
+  # resource :session, only: [:new, :create]
+  # resources :sessions, only: [:destroy]
 
-  resources :suggestions do
+  resources :suggestions, except: [:new] do
     resources :votes, only: [:create]
   end
 

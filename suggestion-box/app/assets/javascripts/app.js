@@ -26,6 +26,16 @@ app.config([
           }]
         }
       })
+      .state('suggestionEdit', {
+        url: '/suggestion/{id}/edit',
+        templateUrl: 'suggestions/_edit.html',
+        controller: 'SuggestionController',
+        resolve: {
+          suggestion: ['$stateParams', 'suggestions', function($stateParams, suggestions) {
+            return suggestions.get($stateParams.id);
+          }]
+        }
+      })
 
     $urlRouterProvider.otherwise('home');
 }]);

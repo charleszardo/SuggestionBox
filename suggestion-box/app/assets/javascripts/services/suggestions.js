@@ -19,5 +19,11 @@ app.factory('suggestions', ['$http', function($http) {
 			o.suggestions.push(success.data);
 		});
 	};
+
+	o.update = function(suggestion) {
+		return $http.put('/suggestions/'+ suggestion.id + '.json', suggestion).then(function(success) {
+			return success.data;
+		})
+	}
 	return o;
 }]);
