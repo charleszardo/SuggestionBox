@@ -18,7 +18,7 @@
 <div class="row">
   <h5>Comments ( {{ suggestion.comments.length }} ):</h5>
 </div>
-<div class="comments" ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+<div class="comments" ng-repeat="comment in suggestion.comments | orderBy: '-upvotes'">
   <div class="row post">
     <p>{{ comment.body }}</p>
     <p>
