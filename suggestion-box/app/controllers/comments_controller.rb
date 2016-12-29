@@ -7,9 +7,7 @@ class CommentsController < ApplicationController
     comment.author = User.all.first
     comment.save
 
-    p suggestion
-    p comment
-    respond_to suggestion, comment
+    respond_with(comment)
 
     # if @comment.save
     #   redirect_to suggestion_url(@comment.suggestion)

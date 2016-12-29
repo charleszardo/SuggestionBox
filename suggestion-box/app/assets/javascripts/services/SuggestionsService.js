@@ -36,9 +36,10 @@ app.factory('SuggestionsService', ['$http', function($http) {
 
 	o.addComment = function(suggestion, comment) {
 		return $http.post('/suggestions/' + suggestion.id + '/comments.json', comment).then(function(success) {
-			console.log("SUCCESS!!")
 			return success.data;
-		}, function(error) { console.log(error); })
+		}, function(error) {
+			console.log(error);
+		});
 	};
 
 	return o;

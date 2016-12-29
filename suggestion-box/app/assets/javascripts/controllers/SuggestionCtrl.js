@@ -11,7 +11,10 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 			SuggestionsService.addComment(suggestion, {
 				body: $scope.commentBody
 			}).then(function(success) {
-				
+				suggestion.comments.push({
+					body: success.body,
+					upvotes: 0
+				});
 			})
 			// suggestion.comments.push({
 			// 	body: $scope.postBody,
