@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', ['$scope', 'SuggestionsService', 'VotingService', function($scope, SuggestionsService, VotingService) {
+app.controller('HomeCtrl', ['$scope', 'SuggestionsService', function($scope, SuggestionsService) {
 	$scope.suggestions = SuggestionsService.suggestions;
 	$scope.addSuggestion = function () {
 		if(!$scope.title || $scope.title === '') { return; }
@@ -8,14 +8,6 @@ app.controller('HomeCtrl', ['$scope', 'SuggestionsService', 'VotingService', fun
 		})
 
 		$scope.title = '';
-	};
-
-	$scope.upVote = function(suggestion) {
-		VotingService.vote(suggestion, true);
-	};
-
-	$scope.downVote = function(suggestion) {
-		VotingService.vote(suggestion, false);
 	};
 
 	$scope.getSuggestionIndex = function(suggestion) {
