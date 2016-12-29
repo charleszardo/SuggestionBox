@@ -1,4 +1,4 @@
-app.controller('HomeController', ['$scope', 'suggestions', function($scope, suggestions) {
+app.controller('HomeController', ['$scope', 'suggestions', 'voting', function($scope, suggestions, voting) {
 	$scope.suggestions = suggestions.suggestions;
 
 	$scope.addSuggestion = function () {
@@ -14,7 +14,7 @@ app.controller('HomeController', ['$scope', 'suggestions', function($scope, sugg
 	};
 
 	$scope.upVote = function(suggestion) {
-		suggestion.upvotes += 1;
+		voting.vote(suggestion, true);
 	};
 
 	$scope.getSuggestionIndex = function(suggestion) {
