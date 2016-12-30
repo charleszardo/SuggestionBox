@@ -1,46 +1,47 @@
-app.factory('SuggestionsService', ['$http', function($http) {
-	var o = {};
-	o.suggestions = [];
+app.service('SuggestionsService', ['$http', function($http) {
+	this.suggestions = [];
 
-	o.getAll = function () {
+	this.getAll = function () {
+		var that = this;
+
 		return $http.get('/suggestions.json').then(function(success) {
-			angular.copy(success.data, o.suggestions);
+			angular.copy(success.data, that.suggestions);
 		});
 	};
 
-	o.get = function (id) {
+	this.get = function (id) {
 		return $http.get('/suggestions/' + id + '.json').then(function(success) {
 			return success.data;
 		});
 	};
 
-	o.create = function(suggestion) {
+	this.create = function(suggestion) {
+		var that = this;
+
 		return $http.post('/suggestions.json', suggestion).then(function(success){
 			success.data.vote_count = 0;
 			success.data.comments = [];
-			o.suggestions.push(success.data);
+			that.suggestions.push(success.data);
 		});
 	};
 
-	o.update = function(suggestion) {
+	this.update = function(suggestion) {
 		return $http.put('/suggestions/'+ suggestion.id + '.json', suggestion).then(function(success) {
 			return success.data;
 		});
 	};
 
-	o.delete = function(suggestion) {
+	this.delete = function(suggestion) {
 		return $http.delete('/suggestions/' + suggestion.id + '.json').then(function(success) {
 			return success.data;
 		});
 	};
 
-	o.addComment = function(suggestion, comment) {
+	this.addComment = function(suggestion, comment) {
 		return $http.post('/suggestions/' + suggestion.id + '/comments.json', comment).then(function(success) {
 			return success.data;
 		}, function(error) {
 			console.log(error);
 		});
 	};
-
-	return o;
 }]);
