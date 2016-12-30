@@ -13,15 +13,9 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 			}).then(function(success) {
 				suggestion.comments.push({
 					body: success.body,
-					upvotes: 0
+					vote_count: 0
 				});
-			})
-			// suggestion.comments.push({
-			// 	body: $scope.postBody,
-			// 	upvotes: 0
-			// });
-			//
-			// $scope.postBody = '';
+			});
 		};
 
 		$scope.editSuggestion = function() {

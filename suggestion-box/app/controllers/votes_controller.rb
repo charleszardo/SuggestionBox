@@ -2,14 +2,17 @@ class VotesController < ApplicationController
   # before_action :require_login
 
   def create
+    klass = params[:suggestion_id] ? Suggestion : Comment
+
     vote = Vote.new(vote_params)
-    vote.suggestion_id = params[:suggestion_id]
+    vote.voteable_type = klass.to_s
+    vote.voteable_id = params[:suggestion_id] || params[:comment_id]
     vote.user_id = vote.user_id || 1
+
     vote.save
 
-    suggestion = vote.suggestion
-
-    respond_with(suggestion, { vote_count: suggestion.vote_count })
+    obj = klass.find(vote.voteable_id)
+    respond_with(obj, { vote_count: obj.vote_count })
     # curr_vote_obj = Vote.find_by(user: current_user,
     #                          suggestion_id: params[:suggestion_id])
     #
