@@ -15,6 +15,8 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 					body: success.body,
 					vote_count: 0
 				});
+
+				$scope.commentBody = '';
 			});
 		};
 

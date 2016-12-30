@@ -8,6 +8,7 @@ app.controller('HomeCtrl', ['$scope', 'SuggestionsService', function($scope, Sug
 		})
 
 		$scope.title = '';
+		$scope.body = '';
 	};
 
 	$scope.getSuggestionIndex = function(suggestion) {
