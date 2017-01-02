@@ -1,5 +1,8 @@
 class Suggestion < ActiveRecord::Base
-  validates :title, :author, presence: true
+  # TODO uncomment once auth is complete
+  # validates :author, presence: true
+
+  validates :title, presence: true
 
   belongs_to :author, class_name: "User", foreign_key: "user_id"
 

@@ -18,7 +18,7 @@ class SuggestionsController < ApplicationController
     suggestion = Suggestion.new(suggestion_params)
 
     # CHANGE BELOW AFTER IMPLEMENTING USERS
-    suggestion.author = User.all.first
+    suggestion.user_id = 1
     suggestion.save
 
     respond_with suggestion
@@ -38,7 +38,7 @@ class SuggestionsController < ApplicationController
   def destroy
     suggestion = Suggestion.find(params[:id])
     suggestion.destroy
-    
+
     respond_with suggestion
   end
 
