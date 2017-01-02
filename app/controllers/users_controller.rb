@@ -1,17 +1,19 @@
 class UsersController < ApplicationController
-  before_action :require_no_login, only: [:create, :new]
-  before_action :require_is_current_user, only: [:edit, :update]
+  # before_action :require_no_login, only: [:create, :new]
+  # before_action :require_is_current_user, only: [:edit, :update]
 
   def create
-    @user = User.new(user_params)
+    user = User.create(user_params)
 
-    if @user.save
-      login_user!(@user)
-      redirect_to user_url(@user)
-    else
-      add_flash_error(@user.errors.full_messages)
-      redirect_to root_url
-    end
+    respond_with user
+
+    # if @user.save
+    #   login_user!(@user)
+    #   redirect_to user_url(@user)
+    # else
+    #   add_flash_error(@user.errors.full_messages)
+    #   redirect_to root_url
+    # end
   end
 
   def new
