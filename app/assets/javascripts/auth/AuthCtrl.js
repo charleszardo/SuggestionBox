@@ -1,4 +1,4 @@
-app.controller('AuthCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+app.controller('AuthCtrl', ['$scope', 'AuthService', function($scope, AuthService) {
   $scope.register = function () {
     var user_params = {
       user: {
@@ -6,9 +6,7 @@ app.controller('AuthCtrl', ['$scope', '$http', '$state', function($scope, $http,
         password: $scope.password
       }
     }
-    console.log($scope)
-    return $http.post('/users.json', user_params).then(function(success) {
-      $state.go('home')
-    })
+
+    return AuthService.register(user_params);
   };
 }]);
