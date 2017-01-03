@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  require 'auth_token'
+
   attr_reader :current_user
 
   rescue_from AuthenticationTimeoutError, with: :authentication_timeout

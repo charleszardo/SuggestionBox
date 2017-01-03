@@ -1,6 +1,4 @@
 class AuthController < ApplicationController
-  require 'auth_token'
-
   def authenticate
     user = User.find_by_credentials(params[:username], params[:password])
 
