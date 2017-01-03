@@ -5,7 +5,7 @@ app.service('VotingService', ['$http', function($http) {
 				params = { upvote: val};
 
 		return $http.post(resource + obj.id + '/votes.json', params).then(function(success) {
-			obj.vote_count += (val === true ? 1 : -1)
+			obj.vote_count = success.data.vote_count;
 		});
 	};
 }]);
