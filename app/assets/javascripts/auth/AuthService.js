@@ -1,5 +1,5 @@
-app.service('AuthService', ['$http', '$q', '$rootScope', '$state', 'AuthToken', 'AuthEvents',
-  function($http, $q, $rootScope, $state, AuthToken, AuthEvents) {
+app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore', 'AuthToken', 'AuthEvents',
+  function($http, $q, $rootScope, $state, $cookieStore, AuthToken, AuthEvents) {
 
   this.register = function(user_params) {
     var that = this;
@@ -8,9 +8,9 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', 'AuthToken', 
 
       that.login(user.username, user.password);
     }).then(function() {
-      // $state.go('home');
+      $state.go('home');
     });
-  };
+  }
 
   this.login = function(username, password) {
     var d = $q.defer();
@@ -18,8 +18,10 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', 'AuthToken', 
     $http.post('/authenticate', { username: username, password: password })
          .then(function(success) {
            var resp = success.data;
+           $cookieStore.put('suggestionUser', resp.user);
            AuthToken.setToken(resp.auth_token);
            $rootScope.$broadcast(AuthEvents.loginSuccess);
+           $rootScope.$broadcast('login!')
            d.resolve(resp.user);
          }, function(error) {
            var resp = success.data;
@@ -28,5 +30,20 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', 'AuthToken', 
          });
 
     return d.promise;
-  };
+  }
+
+  this.currentUser = function() {
+    return $cookieStore.get('suggestionUser');
+  }
+
+  this.isAuthenticated = function() {
+    return !!AuthToken.getToken();
+  }
+
+  this.logout = function () {
+    $rootScope.$broadcast('logout!', 'xyz');
+    AuthToken.destroyToken();
+    $cookieStore.remove('suggestionUser');
+    $state.go('home');
+  }
 }]);

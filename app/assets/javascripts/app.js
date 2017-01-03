@@ -1,4 +1,4 @@
-var app = angular.module('SuggestionBox', ['ui.router', 'templates']);
+var app = angular.module('SuggestionBox', ['ui.router', 'templates', 'ngCookies']);
 
 app.config([
   '$stateProvider',
