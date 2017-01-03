@@ -1,6 +1,6 @@
 class SuggestionsController < ApplicationController
   before_action :require_login!, only: [:create, :new]
-  # before_action :require_current_user_is_owner, only: [:update, :edit, :destroy]
+  before_action :require_current_user_is_owner!, only: [:update, :edit, :destroy]
 
   def index
     @suggestions = Suggestion.includes(:author, :votes, :comments).all
@@ -23,10 +23,6 @@ class SuggestionsController < ApplicationController
     respond_with suggestion
   end
 
-  def edit
-    respond_with Suggestion.find(params[:id])
-  end
-
   def update
     suggestion = Suggestion.find(params[:id])
     suggestion.update_attributes(suggestion_params)
@@ -41,12 +37,14 @@ class SuggestionsController < ApplicationController
     respond_with suggestion
   end
 
+  def current_user_is_owner?
+    current_user.is_owner?(:suggestion, Suggestion.find(params[:id]))
+  end
+
   private
   def suggestion_params
     params.require(:suggestion).permit(:title, :body)
   end
 
-  def current_user_is_owner?
-    current_user.is_owner?(:suggestion, Suggestion.find(params[:id]))
-  end
+
 end

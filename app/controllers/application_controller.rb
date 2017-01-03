@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   protected
   def require_login!
     fail NotAuthenticatedError unless user_id_included_in_auth_token?
-    @current_user = User.find(decoded_auth_token[:user_id])
+    @current_user ||= current_user
   rescue JWT::ExpiredSignature
     raise AuthenticationTimeoutError
   rescue JWT::VerificationError, JWT::DecodeError
@@ -42,9 +42,17 @@ class ApplicationController < ActionController::Base
     fail AccessDeniedError if user_id_included_in_auth_token?
   end
 
+  def require_current_user_is_owner!
+    fail AccessDeniedError unless current_user_is_owner?
+  end
+
   private
   def user_params
     params.require(:user).permit(:username, :password, :current_password)
+  end
+
+  def current_user
+    @current_user = User.find(decoded_auth_token[:user_id])
   end
 
   # Auth Helpers
@@ -76,9 +84,6 @@ class ApplicationController < ActionController::Base
   end
 
   # OLD HELPERS
-  # def current_user
-  #   @current_user ||= current_session.user if current_session
-  # end
 
   def current_session
     @current_session ||= Session.includes(:user).find_by(session_token: session[:session_token])
@@ -93,20 +98,6 @@ class ApplicationController < ActionController::Base
     curr_session = Session.new(user: user, session_token: token)
 
     session[:session_token] = token if curr_session.save
-  end
-
-  def require_current_user_is_owner
-    require_login
-
-    unless current_user_is_owner?
-      add_flash_error("Access Denied!")
-
-      redirect_to root_url
-    end
-  end
-
-  def current_user_is_owner?
-
   end
 
   def add_flash_error(msg)
