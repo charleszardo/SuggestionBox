@@ -8,6 +8,6 @@ app.service('AuthToken', ['$window', function($window) {
   }
 
   this.destroyToken = function() {
-    return $window.localStorage['suggestionBoxToken'] = null;
+    return $window.localStorage.removeItem('suggestionBoxToken');
   }
 }]);
