@@ -21,7 +21,7 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore
            $cookieStore.put('suggestionUser', resp.user);
            AuthToken.setToken(resp.auth_token);
            $rootScope.$broadcast(AuthEvents.loginSuccess);
-           $rootScope.$broadcast('login!')
+           $rootScope.$broadcast('login!');
            d.resolve(resp.user);
          }, function(error) {
            var resp = success.data;

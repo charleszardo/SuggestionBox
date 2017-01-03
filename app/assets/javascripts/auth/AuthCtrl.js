@@ -8,5 +8,5 @@ app.controller('AuthCtrl', ['$scope', 'AuthService', function($scope, AuthServic
     }
 
     return AuthService.register(user_params);
-  };
+  }
 }]);

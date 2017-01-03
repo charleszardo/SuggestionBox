@@ -5,7 +5,7 @@ app.controller('NavCtrl', ['$scope', 'AuthService', function($scope, AuthService
   $scope.user = AuthService.currentUser();
 
   $scope.$on('logout!', function(events, args){
-    $scope.user = { username: ''}
+    $scope.user = { username: ''};
     $scope.signedIn = false;
   })
 
@@ -13,16 +13,4 @@ app.controller('NavCtrl', ['$scope', 'AuthService', function($scope, AuthService
     $scope.user = AuthService.currentUser();
     $scope.signedIn = true;
   });
-
-  // $scope.$on('devise:new-registration', function(e, user) {
-  //   $scope.user = user;
-  // });
-  //
-  // $scope.$on('devise:login', function(e, user) {
-  //   $scope.user = user;
-  // });
-  //
-  // $scope.$on('devise:logout', function(e, user) {
-  //   $scope.user = {};
-  // });
 }]);
