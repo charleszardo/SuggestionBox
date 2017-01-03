@@ -15,12 +15,12 @@ class SuggestionsController < ApplicationController
   end
 
   def create
-    suggestion = Suggestion.new(suggestion_params)
+    @suggestion = Suggestion.new(suggestion_params)
 
-    suggestion.author = current_user
-    suggestion.save
+    @suggestion.author = current_user
+    @suggestion.save
 
-    respond_with suggestion
+    respond_with :create
   end
 
   def update

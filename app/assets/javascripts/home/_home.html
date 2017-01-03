@@ -1,7 +1,7 @@
 <div class="suggestions" ng-repeat="suggestion in suggestions | orderBy: '-vote_count'">
   <div class="row suggestion">
     <h3><a ng-href="#!/suggestion/{{ suggestion.id }}">{{ suggestion.title }}</a></h3>
-    <h4>by {{ suggestion.author }}</h4>
+    <h4>by {{ suggestion.author_username }}</h4>
     <p>
       <voting ng-show="signedIn" item="suggestion"></voting>
       <span>
