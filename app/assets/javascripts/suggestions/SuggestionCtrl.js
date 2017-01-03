@@ -4,6 +4,15 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 		$scope.suggestion = suggestion;
 		$scope.notification = ' ';
 
+		$scope.isOwner = function(suggestion) {
+			var currentUser = AuthService.currentUser();
+			if (!currentUser) {
+				return false;
+			} else {
+				return currentUser.id === suggestion.user_id;
+			}
+		};
+
 		$scope.addComment = function(suggestion) {
 			if (!$scope.commentBody || $scope.commentBody === '') {
 				return;
