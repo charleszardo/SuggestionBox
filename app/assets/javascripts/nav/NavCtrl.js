@@ -1,6 +1,7 @@
-app.controller('NavCtrl', ['$scope', 'AuthService', function($scope, AuthService) {
+app.controller('NavCtrl', ['$scope', '$state', 'AuthService', function($scope, $state, AuthService) {
   $scope.signedIn = AuthService.isAuthenticated();
   $scope.logout = AuthService.logout;
+  $scope.$state = $state;
 
   $scope.user = AuthService.currentUser();
 
