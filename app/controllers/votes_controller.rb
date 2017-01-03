@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  # before_action :require_login
+  before_action :require_login!
 
   def create
     klass = params[:suggestion_id] ? Suggestion : Comment

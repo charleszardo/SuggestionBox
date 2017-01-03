@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :require_no_login, only: [:create, :new]
+  before_action :require_no_login!, only: [:create]
   # before_action :require_is_current_user, only: [:edit, :update]
 
   def create
@@ -14,19 +14,6 @@ class UsersController < ApplicationController
     #   add_flash_error(@user.errors.full_messages)
     #   redirect_to root_url
     # end
-  end
-
-  def new
-    @signin_page = true
-    @user = User.new
-
-    render :new
-  end
-
-  def index
-    @users = User.all
-
-    render :index
   end
 
   def show

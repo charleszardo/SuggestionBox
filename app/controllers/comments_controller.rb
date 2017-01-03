@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :require_login
+  before_action :require_login!
 
   def create
     suggestion = Suggestion.find(params[:suggestion_id])
@@ -8,13 +8,6 @@ class CommentsController < ApplicationController
     comment.save
 
     respond_with(comment)
-
-    # if @comment.save
-    #   redirect_to suggestion_url(@comment.suggestion)
-    # else
-    #   add_flash_error(@comment.errors.full_messages)
-    #   redirect_to suggestion_url(@comment.suggestion)
-    # end
   end
 
   private

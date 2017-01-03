@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  def authenticate_request!
+  def require_login!
     fail NotAuthenticatedError unless user_id_included_in_auth_token?
     @current_user = User.find(decoded_auth_token[:user_id])
   rescue JWT::ExpiredSignature
@@ -36,7 +36,16 @@ class ApplicationController < ActionController::Base
     raise NotAuthenticatedError
   end
 
+  def require_no_login!
+    fail AccessDeniedError if user_id_included_in_auth_token?
+  end
+
   private
+  def user_params
+    params.require(:user).permit(:username, :password, :current_password)
+  end
+
+  # Auth Helpers
   def user_id_included_in_auth_token?
     http_auth_token && decoded_auth_token && decoded_auth_token[:user_id]
   end
@@ -51,6 +60,7 @@ class ApplicationController < ActionController::Base
                        end
   end
 
+  # Auth Errors
   def authentication_timeout
     render json: { errors: ['Authentication Timeout'] }, status: 419
   end
@@ -62,6 +72,8 @@ class ApplicationController < ActionController::Base
   def user_not_authenticated
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
   end
+
+  # OLD HELPERS
   # def current_user
   #   @current_user ||= current_session.user if current_session
   # end
@@ -79,26 +91,6 @@ class ApplicationController < ActionController::Base
     curr_session = Session.new(user: user, session_token: token)
 
     session[:session_token] = token if curr_session.save
-  end
-
-  def user_params
-    params.require(:user).permit(:username, :password, :current_password)
-  end
-
-  def require_login
-    unless logged_in?
-      add_flash_error("You must be logged in to access this section")
-
-      redirect_to root_url
-    end
-  end
-
-  def require_no_login
-    unless !logged_in?
-      add_flash_error("Please sign out to access this section")
-
-      redirect_to root_url
-    end
   end
 
   def require_current_user_is_owner
