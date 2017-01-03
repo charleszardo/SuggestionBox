@@ -26,7 +26,10 @@
   <div class="row post">
     <p>{{ comment.body }}</p>
     <p>
-      <voting item="comment"></voting>
+      <voting ng-show="signedIn" item="comment"></voting>
+      <span>
+        Upvotes: {{ comment.vote_count }}
+      </span>
     </p>
   </div>
 </div>
