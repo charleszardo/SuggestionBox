@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # root "suggestions#index"
   root to: 'application#angular'
 
+  post 'authenticate' => 'auth#authenticate'
+
   resources :users
 
   # resource :session, only: [:new, :create]

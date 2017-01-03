@@ -3,7 +3,8 @@ var app = angular.module('SuggestionBox', ['ui.router', 'templates']);
 app.config([
   '$stateProvider',
   '$urlRouterProvider',
-  function($stateProvider, $urlRouterProvider) {
+  '$httpProvider',
+  function($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $stateProvider
       .state('home', {
@@ -43,4 +44,6 @@ app.config([
       })
 
     $urlRouterProvider.otherwise('home');
+
+    $httpProvider.interceptors.push("AuthInterceptor");
 }]);

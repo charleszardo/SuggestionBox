@@ -10,10 +10,10 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
 
-  def self.find_by_credentials(creds_hash)
-    user = User.find_by_username(creds_hash[:username])
+  def self.find_by_credentials(username, password)
+    user = User.find_by_username(username)
 
-    !user.nil? && user.is_password?(creds_hash[:password]) ? user : nil
+    !user.nil? && user.is_password?(password) ? user : nil
   end
 
   def password=(password)
