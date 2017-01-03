@@ -1,5 +1,7 @@
-app.controller('HomeCtrl', ['$scope', 'SuggestionsService', function($scope, SuggestionsService) {
+app.controller('HomeCtrl', ['$scope', 'SuggestionsService', 'AuthService', function($scope, SuggestionsService, AuthService) {
+	$scope.signedIn = AuthService.isAuthenticated();
 	$scope.suggestions = SuggestionsService.suggestions;
+
 	$scope.addSuggestion = function () {
 		if(!$scope.title || $scope.title === '') { return; }
 		SuggestionsService.create({
@@ -9,9 +11,17 @@ app.controller('HomeCtrl', ['$scope', 'SuggestionsService', function($scope, Sug
 
 		$scope.title = '';
 		$scope.body = '';
-	};
+	}
 
 	$scope.getSuggestionIndex = function(suggestion) {
 		return $scope.suggestions.indexOf(suggestion);
-	};
+	}
+
+	$scope.$on('logout!', function(events, args){
+		$scope.signedIn = false;
+	})
+
+	$scope.$on('login!', function(events, args) {
+		$scope.signedIn = true;
+	});
 }]);
