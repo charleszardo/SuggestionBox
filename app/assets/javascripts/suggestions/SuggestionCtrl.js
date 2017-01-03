@@ -1,7 +1,8 @@
-app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'suggestion',
-	function($scope, $state, SuggestionsService, suggestion) {
+app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'suggestion', 'AuthService',
+	function($scope, $state, SuggestionsService, suggestion, AuthService) {
+		$scope.signedIn = AuthService.isAuthenticated();
 		$scope.suggestion = suggestion;
-		$scope.notification = ' '
+		$scope.notification = ' ';
 
 		$scope.addComment = function(suggestion) {
 			if (!$scope.commentBody || $scope.commentBody === '') {
@@ -18,7 +19,7 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 
 				$scope.commentBody = '';
 			});
-		};
+		}
 
 		$scope.editSuggestion = function() {
 			if(!$scope.suggestion.title || $scope.suggestion.title === '') { return; }
@@ -27,9 +28,17 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 				$scope.body = '';
 				$state.go('suggestions', { id: $scope.suggestion.id })
 			});
-		};
+		}
 
 		$scope.deleteSuggestion = function() {
 			SuggestionsService.delete(suggestion)
 		}
+
+		$scope.$on('logout!', function(events, args){
+			$scope.signedIn = false;
+		})
+
+		$scope.$on('login!', function(events, args) {
+			$scope.signedIn = true;
+		});
 }]);

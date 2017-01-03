@@ -1,7 +1,7 @@
 class SuggestionsController < ApplicationController
   # before_action :require_login, only: [:create, :new]
   # before_action :require_current_user_is_owner, only: [:update, :edit, :destroy]
-  before_action :authenticate_request!, only: [:show]
+  # before_action :authenticate_request!, only: [:show]
 
   def index
     @suggestions = Suggestion.includes(:author, :votes, :comments).all
