@@ -17,8 +17,7 @@ class SuggestionsController < ApplicationController
   def create
     suggestion = Suggestion.new(suggestion_params)
 
-    # CHANGE BELOW AFTER IMPLEMENTING USERS
-    suggestion.user_id = 1
+    suggestion.author = current_user
     suggestion.save
 
     respond_with suggestion
