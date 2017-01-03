@@ -1,6 +1,5 @@
 class Vote < ActiveRecord::Base
-  # CHANGE BELOW AFTER USER IMPLEMENTATION
-  # validates :user, :suggestion, presence: true
+  validates :user, :voteable, presence: true
   validates :voteable, presence: true
   validates_inclusion_of :upvote, :in => [true, false]
 
