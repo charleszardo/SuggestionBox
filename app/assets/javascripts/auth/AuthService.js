@@ -4,18 +4,15 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore
   this.register = function(user_params) {
     var that = this;
     return $http.post('/users.json', user_params).then(function(success) {
-      var user = user_params.user;
-
-      that.login(user.username, user.password);
-    }).then(function() {
-      $state.go('home');
-    });
+      that.login(user_params);
+    })
   }
 
-  this.login = function(username, password) {
-    var d = $q.defer();
+  this.login = function(user_params) {
+    var user = user_params.user,
+           d = $q.defer();
 
-    $http.post('/authenticate', { username: username, password: password })
+    $http.post('/authenticate', user)
          .then(function(success) {
            var resp = success.data;
            $cookieStore.put('suggestionUser', resp.user);
@@ -24,9 +21,12 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore
            $rootScope.$broadcast('login!');
            d.resolve(resp.user);
          }, function(error) {
-           var resp = success.data;
+           var resp = error.data;
            $rootScope.$broadcast(AuthEvents.loginFailed);
            d.reject(resp.error);
+         })
+         .then(function() {
+           $state.go('home');
          });
 
     return d.promise;

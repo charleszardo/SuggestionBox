@@ -8,12 +8,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="SuggestionBox">
+  <nav ng-include="'nav/_nav.html'"></nav>
   <header class="text-center">
     <h1>Suggestion Box</h1>
   </header>
   <div class="main-container">
     <div class="container view-container">
-      <div ng-include="'nav/_nav.html'"></div>
+
       <ui-view></ui-view>
     </div>
   </div>

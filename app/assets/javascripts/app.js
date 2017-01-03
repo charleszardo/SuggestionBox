@@ -42,6 +42,11 @@ app.config([
         templateUrl: 'auth/_register.html',
         controller: 'AuthCtrl'
       })
+      .state('login', {
+        url: '/login',
+        templateUrl: 'auth/_login.html',
+        controller: 'AuthCtrl'
+      })
 
     $urlRouterProvider.otherwise('home');
 
