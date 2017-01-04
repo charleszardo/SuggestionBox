@@ -1,5 +1,5 @@
-app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore', 'AuthToken', 'AuthEvents',
-  function($http, $q, $rootScope, $state, $cookieStore, AuthToken, AuthEvents) {
+app.service('AuthService', ['$http', '$q', '$rootScope', '$cookieStore', 'AuthToken', 'AuthEvents',
+  function($http, $q, $rootScope, $cookieStore, AuthToken, AuthEvents) {
 
   this.register = function(user_params) {
     var that = this,
@@ -47,6 +47,5 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore
     $rootScope.$broadcast('logout!');
     AuthToken.destroyToken();
     $cookieStore.remove('suggestionUser');
-    $state.go('home');
   }
 }]);
