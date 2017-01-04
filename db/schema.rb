@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20161229231415) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.integer  "suggestion_id", null: false
     t.text     "body",          null: false
@@ -21,8 +24,8 @@ ActiveRecord::Schema.define(version: 20161229231415) do
     t.integer  "user_id",       null: false
   end
 
-  add_index "comments", ["suggestion_id"], name: "index_comments_on_suggestion_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["suggestion_id"], name: "index_comments_on_suggestion_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_token", null: false
@@ -31,8 +34,8 @@ ActiveRecord::Schema.define(version: 20161229231415) do
     t.datetime "updated_at",    null: false
   end
 
-  add_index "sessions", ["session_token"], name: "index_sessions_on_session_token", unique: true
-  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id"
+  add_index "sessions", ["session_token"], name: "index_sessions_on_session_token", unique: true, using: :btree
+  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id", using: :btree
 
   create_table "suggestions", force: :cascade do |t|
     t.string   "title",      null: false
@@ -42,7 +45,7 @@ ActiveRecord::Schema.define(version: 20161229231415) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "suggestions", ["user_id"], name: "index_suggestions_on_user_id"
+  add_index "suggestions", ["user_id"], name: "index_suggestions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
@@ -51,7 +54,7 @@ ActiveRecord::Schema.define(version: 20161229231415) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.boolean  "upvote",        null: false
@@ -62,8 +65,8 @@ ActiveRecord::Schema.define(version: 20161229231415) do
     t.string   "voteable_type"
   end
 
-  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
-  add_index "votes", ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type"
-  add_index "votes", ["voteable_id"], name: "index_votes_on_voteable_id"
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
+  add_index "votes", ["voteable_id"], name: "index_votes_on_voteable_id", using: :btree
 
 end
