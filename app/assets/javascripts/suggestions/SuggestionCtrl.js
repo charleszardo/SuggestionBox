@@ -14,6 +14,8 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 		};
 
 		$scope.addComment = function(suggestion) {
+			var comment;
+
 			if (!$scope.commentBody || $scope.commentBody === '') {
 				return;
 			}
@@ -21,10 +23,9 @@ app.controller('SuggestionCtrl', ['$scope', '$state', 'SuggestionsService', 'sug
 			SuggestionsService.addComment(suggestion, {
 				body: $scope.commentBody
 			}).then(function(success) {
-				suggestion.comments.push({
-					body: success.body,
-					vote_count: 0
-				});
+				comment = success;
+				comment.vote_count = 0;
+				suggestion.comments.push(comment);
 
 				$scope.commentBody = '';
 			});
