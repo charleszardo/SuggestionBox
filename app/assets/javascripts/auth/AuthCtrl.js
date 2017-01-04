@@ -1,4 +1,4 @@
-app.controller('AuthCtrl', ['$scope', 'AuthService', function($scope, AuthService) {
+app.controller('AuthCtrl', ['$scope', '$state', 'AuthService', function($scope, $state, AuthService) {
   $scope.errors = [];
 
   $scope.register = function () {
@@ -9,13 +9,13 @@ app.controller('AuthCtrl', ['$scope', 'AuthService', function($scope, AuthServic
       }
     }
 
-    AuthService.register(user_params).then(function(errors){
-      $scope.errors = [];
-
-      if (errors) {
-        $scope.errors = errors;
-      }
-    });
+    AuthService.register(user_params)
+               .then(function(success){
+                 $state.go('home');
+               }, function(errors) {
+                 $scope.errors = [];
+                 $scope.errors = errors;
+               })
   }
 
   $scope.login = function () {
@@ -26,6 +26,12 @@ app.controller('AuthCtrl', ['$scope', 'AuthService', function($scope, AuthServic
       }
     }
 
-    return AuthService.login(user_params);
+    AuthService.login(user_params)
+               .then(function(success){
+                 $state.go('home');
+               }, function(errors) {
+                 $scope.errors = [];
+                 $scope.errors = errors;
+               });
   }
 }]);

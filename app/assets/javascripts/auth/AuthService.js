@@ -2,33 +2,34 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore
   function($http, $q, $rootScope, $state, $cookieStore, AuthToken, AuthEvents) {
 
   this.register = function(user_params) {
-    var that = this;
-    return $http.post('/users.json', user_params).then(function(success) {
-      that.login(user_params);
-    }, function(error) {
-      return error.data.errors;
-    })
+    var that = this,
+           d = $q.defer();
+
+    $http.post('/users.json', user_params)
+         .then(function(success) {
+           that.login(user_params);
+           d.resolve(success.data);
+         }, function(error) {
+           d.reject(error.data.errors);
+         });
+
+    return d.promise;
   }
 
   this.login = function(user_params) {
     var user = user_params.user,
-           d = $q.defer();
+           d = $q.defer(),
+        data;
 
     $http.post('/authenticate', user)
          .then(function(success) {
-           var resp = success.data;
-           $cookieStore.put('suggestionUser', resp.user);
-           AuthToken.setToken(resp.auth_token);
-           $rootScope.$broadcast(AuthEvents.loginSuccess);
+           data = success.data;
+           $cookieStore.put('suggestionUser', data.user);
+           AuthToken.setToken(data.auth_token);
            $rootScope.$broadcast('login!');
-           d.resolve(resp.user);
+           d.resolve(data.user);
          }, function(error) {
-           var resp = error.data;
-           $rootScope.$broadcast(AuthEvents.loginFailed);
-           d.reject(resp.error);
-         })
-         .then(function() {
-           $state.go('home');
+           d.reject(error.data.errors);
          });
 
     return d.promise;
@@ -43,7 +44,7 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore
   }
 
   this.logout = function () {
-    $rootScope.$broadcast('logout!', 'xyz');
+    $rootScope.$broadcast('logout!');
     AuthToken.destroyToken();
     $cookieStore.remove('suggestionUser');
     $state.go('home');
