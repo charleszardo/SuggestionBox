@@ -1,4 +1,6 @@
 app.controller('AuthCtrl', ['$scope', 'AuthService', function($scope, AuthService) {
+  $scope.errors = [];
+
   $scope.register = function () {
     var user_params = {
       user: {
@@ -7,7 +9,13 @@ app.controller('AuthCtrl', ['$scope', 'AuthService', function($scope, AuthServic
       }
     }
 
-    return AuthService.register(user_params);
+    AuthService.register(user_params).then(function(errors){
+      $scope.errors = [];
+
+      if (errors) {
+        $scope.errors = errors;
+      }
+    });
   }
 
   $scope.login = function () {

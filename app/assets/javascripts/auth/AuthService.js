@@ -5,6 +5,8 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$state', '$cookieStore
     var that = this;
     return $http.post('/users.json', user_params).then(function(success) {
       that.login(user_params);
+    }, function(error) {
+      return error.data.errors;
     })
   }
 

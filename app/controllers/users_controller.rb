@@ -3,9 +3,13 @@ class UsersController < ApplicationController
   # before_action :require_is_current_user, only: [:edit, :update]
 
   def create
-    user = User.create(user_params)
+    user = User.new(user_params)
 
-    respond_with user
+    if user.save
+      respond_with user
+    else
+      render json: { errors: user.errors.full_messages }, status: :conflict
+    end
 
     # if @user.save
     #   login_user!(@user)
