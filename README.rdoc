@@ -1,3 +1,7 @@
-== TODO
+= Suggestion Box
 
-* Add angular layer
+Suggestion-making app featuring JSON Web Token-based authentication built from scratch. This app utilizes Rails 4, Angular 1.6, Bootstrap 3, and Sass.
+
+{ Live Demo }[https://suggestionboxx.herokuapp.com]
+== TODO
+* Refactor front-end code
