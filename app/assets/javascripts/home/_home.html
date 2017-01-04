@@ -2,12 +2,13 @@
   <div class="row suggestion">
     <h3><a ng-href="#!/suggestion/{{ suggestion.id }}">{{ suggestion.title }}</a></h3>
     <h4>by {{ suggestion.author_username }}</h4>
-    <p>
+    <div>
+      <span class="vote-count-display">{{ suggestion.vote_count }}</span>
       <voting ng-show="signedIn" item="suggestion"></voting>
-      <span>
-        Upvotes: {{ suggestion.vote_count }} | Comments ( {{ suggestion.comments.length }} )
-      </span>
-    </p>
+      <div>
+        Comments ( <b>{{ suggestion.comments.length }}</b> )
+      </div>
+    </div>
   </div>
 </div>
 <div class="row submit" ng-show="signedIn">

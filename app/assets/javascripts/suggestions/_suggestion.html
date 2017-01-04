@@ -1,17 +1,15 @@
 <div class="row submit">
   <h3>{{ suggestion.title }}</h3>
   <h4>by {{ suggestion.author_username }}</h4>
-  <p>{{ suggestion.body }}</p>
   <p ng-show="isOwner(suggestion)">
     <a ng-href="#!/suggestion/{{ suggestion.id }}/edit">edit</a>
     <a ng-href="#" ng-click="deleteSuggestion()">delete</a>
   </p>
-  <p>
+  <div>
+    <span class="vote-count-display">{{ suggestion.vote_count }}</span>
     <voting ng-show="signedIn" item="suggestion"></voting>
-    <span>
-      Upvotes: {{ suggestion.vote_count }}
-    </span>
-  </p>
+  </div>
+  <p>{{ suggestion.body }}</p>
   <form ng-show="signedIn" ng-submit="addComment(suggestion)" style="margin-top: 50px">
     <div class="form-group">
       <input type="text" class="form-control" placeholder="Add a comment here" ng-model="commentBody"></input>
@@ -24,12 +22,10 @@
 </div>
 <div class="comments" ng-repeat="comment in suggestion.comments | orderBy: '-vote_count'">
   <div class="row post">
-    <p>{{ comment.body }}</p>
-    <p>
+    <div>
+      <span class="vote-count-display">{{ comment.vote_count }}</span>
       <voting ng-show="signedIn" item="comment"></voting>
-      <span>
-        Upvotes: {{ comment.vote_count }}
-      </span>
-    </p>
+      <span>{{ comment.body }}</span>
+    </div>
   </div>
 </div>
