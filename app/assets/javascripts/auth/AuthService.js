@@ -36,6 +36,7 @@ app.service('AuthService', ['$http', '$q', '$rootScope', '$cookieStore', 'AuthTo
   }
 
   this.currentUser = function() {
+    // debugger
     return $cookieStore.get('suggestionUser');
   }
 

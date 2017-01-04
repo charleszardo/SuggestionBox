@@ -40,13 +40,37 @@ app.config([
       .state('register', {
         url: '/register',
         templateUrl: 'auth/_register.html',
-        controller: 'AuthCtrl'
+        controller: 'AuthCtrl',
+        resolve: {
+          isAuthenticated: ['$q', 'AuthService', function($q, AuthService) {
+            var deferred = $q.defer();
+            deferred.resolve(AuthService.isAuthenticated());
+            return deferred.promise;
+          }]
+        },
+        onEnter: ['$state', 'isAuthenticated', function($state, isAuthenticated) {
+          if (isAuthenticated) {
+            $state.go('home');
+          }
+        }]
       })
       .state('login', {
         url: '/login',
         templateUrl: 'auth/_login.html',
-        controller: 'AuthCtrl'
-      })
+        controller: 'AuthCtrl',
+        resolve: {
+          isAuthenticated: ['$q', 'AuthService', function($q, AuthService) {
+            var deferred = $q.defer();
+            deferred.resolve(AuthService.isAuthenticated());
+            return deferred.promise;
+          }]
+        },
+        onEnter: ['$state', 'isAuthenticated', function($state, isAuthenticated) {
+          if (isAuthenticated) {
+            $state.go('home');
+          }
+        }]
+      });
 
     $urlRouterProvider.otherwise('home');
 
